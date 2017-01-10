@@ -1,9 +1,14 @@
 package entities;
 
-public class Role {
+import java.io.Serializable;
+
+public class Role implements Serializable {
 	String roleid;
 	String rolename;
 
+	public Role(){
+		
+	}
 	public Role(String roleid, String rolename) {
 		super();
 		this.roleid = roleid;
