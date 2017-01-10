@@ -5,15 +5,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
-	public static Connection getConnection() throws SQLException{
+	/**
+	 * 
+	 * @return
+	 */
+	public static Connection getConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
+			return DriverManager.getConnection("jdbc:mysql://localhost/bookreview", "root", "root");
+		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		return DriverManager.getConnection("jdbc:mysql://localhost/bookreview","root","root");
-	}
-	public static void closeConnection(Connection con) throws SQLException{
-		con.close();
+		return null;
 	}
 }
