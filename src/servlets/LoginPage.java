@@ -52,7 +52,7 @@ public class LoginPage extends HttpServlet {
 						response.sendRedirect("user.jsp");
 				}
 				else{
-					response.getWriter().append("<center>Username or password is incorrect/center>");
+					response.getWriter().append("<center>Username or password is incorrect</center>");
 					
 				}
 			} catch (SQLException e) {
