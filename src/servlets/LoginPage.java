@@ -42,10 +42,12 @@ public class LoginPage extends HttpServlet {
 			try {
 				UserDAO dao=new UserDAO();
 				user=dao.isExist(user);
+				
 				if(user!=null)
-				{
+				{	
+					Role role=dao.getUserRole(user);
 					session.setAttribute("user",user);
-					Role role=user.getRole();
+					
 					if("admin".equals(role.getRolename()))
 						response.sendRedirect("admin.jsp");
 					else if("user".equals(role.getRolename()))
