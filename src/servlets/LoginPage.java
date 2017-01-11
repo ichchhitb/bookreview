@@ -61,10 +61,10 @@ public class LoginPage extends HttpServlet {
 				Role role = dao.getRoleForUser(user);
 				session.setAttribute("user", user);
 				if (role != null) {
-					if (BookReviewConstants.ADMIN.equals(role.getRolename()))
+					if (BookReviewConstants.ADMIN.equals(role.getRoleName()))
 						response.sendRedirect("admin.jsp");
 
-					else if (BookReviewConstants.USER.equals(role.getRolename()))
+					else if (BookReviewConstants.USER.equals(role.getRoleName()))
 						response.sendRedirect("user.jsp");
 				}
 			} else {

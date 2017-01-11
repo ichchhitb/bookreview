@@ -30,16 +30,16 @@ public class UserDAO {
 	public User isExist(User user) throws SQLException {
 		try {
 			ps = connection.prepareStatement("select * from userdetails where loginid=? and password=?");
-			ps.setString(1, user.getLoginid());
+			ps.setString(1, user.getLoginId());
 			ps.setString(2, user.getPassword());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				String loginidfromdb = rs.getString(BookReviewConstants.LOGIN_ID);
-				String passwordfromdb = rs.getString(BookReviewConstants.PASSWORD);
-				if (loginidfromdb.equals(user.getLoginid()) && passwordfromdb.equals(user.getPassword())) {
+				String loginIdFromDb = rs.getString(BookReviewConstants.LOGIN_ID);
+				String passwordFromDb = rs.getString(BookReviewConstants.PASSWORD);
+				if (loginIdFromDb.equals(user.getLoginId()) && passwordFromDb.equals(user.getPassword())) {
 					this.user = new User();
-					this.user.setLoginid(loginidfromdb);
-					this.user.setPassword(passwordfromdb);
+					this.user.setLoginId(loginIdFromDb);
+					this.user.setPassword(passwordFromDb);
 				}
 			}
 		} finally {
@@ -58,14 +58,14 @@ public class UserDAO {
 		Role role = null;
 		try {
 			ps = connection.prepareStatement("select roleid from userdetails where loginid=?");
-			ps.setString(1, user2.getLoginid());
+			ps.setString(1, user2.getLoginId());
 			ResultSet result = ps.executeQuery();
-			String roleid = "";
+			String roleId = "";
 			while (result.next())
-				roleid = result.getString(BookReviewConstants.ROLE_ID);
+				roleId = result.getString(BookReviewConstants.ROLE_ID);
 			ps.close();
 			ps = connection.prepareStatement("select * from role where roleid=?");
-			ps.setString(1, roleid);
+			ps.setString(1, roleId);
 			result = ps.executeQuery();
 			while (result.next())
 				role = new Role(result.getString(BookReviewConstants.ROLE_ID),
