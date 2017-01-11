@@ -8,6 +8,6 @@
 </head>
 <body>
 	<%User admin=(User)session.getAttribute("user"); %>
-	Welcome <%= admin.getLoginid()%> admin.
+	Welcome <%= admin.getLoginId()%> admin.
 </body>
 </html>

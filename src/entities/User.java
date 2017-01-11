@@ -1,7 +1,7 @@
 package entities;
 
 public class User {
-	String loginid;
+	String loginId;
 	String password;
 	Role role;
 	/**
@@ -15,9 +15,9 @@ public class User {
 	 * @param password
 	 * @param role
 	 */
-	public User(String loginid, String password, Role role) {
+	public User(String loginId, String password, Role role) {
 		super();
-		this.loginid = loginid;
+		this.loginId = loginId;
 		this.password = password;
 		this.role = role;
 	}
@@ -25,8 +25,8 @@ public class User {
 	 * 
 	 * @return
 	 */
-	public String getLoginid() {
-		return loginid;
+	public String getLoginId() {
+		return loginId;
 	}
 	/**
 	 * 
@@ -46,8 +46,8 @@ public class User {
 	 * 
 	 * @param loginid
 	 */
-	public void setLoginid(String loginid) {
-		this.loginid = loginid;
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
 	}
 	/**
 	 * 

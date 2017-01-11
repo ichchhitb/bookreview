@@ -1,8 +1,8 @@
 package entities;
 
 public class Role {
-	String roleid;
-	String rolename;
+	String roleId;
+	String roleName;
 	/**
 	 * 
 	 */
@@ -11,41 +11,41 @@ public class Role {
 	}
 	/**
 	 * 
-	 * @param roleid
-	 * @param rolename
+	 * @param roleId
+	 * @param roleName
 	 */
-	public Role(String roleid, String rolename) {
+	public Role(String roleId, String roleName) {
 		super();
-		this.roleid = roleid;
-		this.rolename = rolename;
+		this.roleId = roleId;
+		this.roleName = roleName;
 	}
 	/**
 	 * 
 	 * @return
 	 */
-	public String getRoleid() {
-		return roleid;
+	public String getRoleId() {
+		return roleId;
 	}
 	/**
 	 * 
 	 * @return
 	 */
-	public String getRolename() {
-		return rolename;
+	public String getRoleName() {
+		return roleName;
 	}
 	/**
 	 * 
 	 * @param roleid
 	 */
-	public void setRoleid(String roleid) {
-		this.roleid = roleid;
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
 	}
 	/**
 	 * 
 	 * @param rolename
 	 */
-	public void setRolename(String rolename) {
-		this.rolename = rolename;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
 }
