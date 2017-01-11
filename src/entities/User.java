@@ -1,6 +1,12 @@
 package entities;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 369696028452298037L;
 	String loginId;
 	String password;
 	Role role;
