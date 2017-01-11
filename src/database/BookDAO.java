@@ -33,6 +33,21 @@ public class BookDAO {
 		}
 	}
 	
-	
+	public boolean delete(Book obj){
+		int numberofrowsaffected=0;
+		try {
+			stmt = con.prepareStatement("delete from bookdetails where ISBN=?");
+			stmt.setString(1, obj.getIsbn());
+			
+			numberofrowsaffected=stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		
+		return numberofrowsaffected>0;
+	}
 	
 }
