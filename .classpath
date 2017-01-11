@@ -10,7 +10,7 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="C:/Program Files/Apache Software Foundation/Tomcat 8.0/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/Apache Software Foundation/Tomcat 8.0/lib/jsp-api.jar"/>
-	<classpathentry kind="lib" path="D:/jars/log4j.jar"/>
-	<classpathentry kind="lib" path="D:/jars/mysql-connector-java-5.1.23-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ankitku/Desktop/jars/log4j.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ankitku/Desktop/jars/mysql-connector-java-5.1.23-bin.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
