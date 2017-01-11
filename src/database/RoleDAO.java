@@ -39,4 +39,20 @@ public class RoleDAO {
 		}
 		return role;
 	}
+	/**
+	 * 
+	 * @param role
+	 * @return
+	 * @throws SQLException
+	 */
+	public boolean setRole(Role role) throws SQLException{
+		ps=connection.prepareStatement("insert into role values(?,?)");
+		boolean flag = false;
+		
+		ps.setString(1, role.getRoleId());
+		ps.setString(2, role.getRoleName());
+		
+		ps.executeQuery();
+		return flag;
+	}
 }

@@ -11,8 +11,9 @@ import entities.User;
 
 public class UserDAO {
 	Connection connection;
-	PreparedStatement ps;
+	PreparedStatement preparedStatement;
 	User user = null;
+
 	/**
 	 * 
 	 * @param connection
@@ -21,6 +22,7 @@ public class UserDAO {
 		super();
 		this.connection = connection;
 	}
+
 	/**
 	 * 
 	 * @param user
@@ -29,10 +31,10 @@ public class UserDAO {
 	 */
 	public User isExist(User user) throws SQLException {
 		try {
-			ps = connection.prepareStatement("select * from userdetails where loginid=? and password=?");
-			ps.setString(1, user.getLoginId());
-			ps.setString(2, user.getPassword());
-			ResultSet rs = ps.executeQuery();
+			preparedStatement = connection.prepareStatement("select * from userdetails where loginid=? and password=?");
+			preparedStatement.setString(1, user.getLoginId());
+			preparedStatement.setString(2, user.getPassword());
+			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				String loginIdFromDb = rs.getString(BookReviewConstants.LOGIN_ID);
 				String passwordFromDb = rs.getString(BookReviewConstants.PASSWORD);
@@ -43,11 +45,12 @@ public class UserDAO {
 				}
 			}
 		} finally {
-			if (ps != null)
-				ps.close();
+			if (preparedStatement != null)
+				preparedStatement.close();
 		}
 		return this.user;
 	}
+
 	/**
 	 * 
 	 * @param user2
@@ -57,23 +60,50 @@ public class UserDAO {
 	public Role getRoleForUser(User user2) throws SQLException {
 		Role role = null;
 		try {
-			ps = connection.prepareStatement("select roleid from userdetails where loginid=?");
-			ps.setString(1, user2.getLoginId());
-			ResultSet result = ps.executeQuery();
+			preparedStatement = connection.prepareStatement("select roleid from userdetails where loginid=?");
+			preparedStatement.setString(1, user2.getLoginId());
+			ResultSet result = preparedStatement.executeQuery();
 			String roleId = "";
 			while (result.next())
 				roleId = result.getString(BookReviewConstants.ROLE_ID);
-			ps.close();
-			ps = connection.prepareStatement("select * from role where roleid=?");
-			ps.setString(1, roleId);
-			result = ps.executeQuery();
+			preparedStatement.close();
+			preparedStatement = connection.prepareStatement("select * from role where roleid=?");
+			preparedStatement.setString(1, roleId);
+			result = preparedStatement.executeQuery();
 			while (result.next())
 				role = new Role(result.getString(BookReviewConstants.ROLE_ID),
 						result.getString(BookReviewConstants.ROLE_NAME));
 		} finally {
-			if (ps != null)
-				ps.close();
+			if (preparedStatement != null)
+				preparedStatement.close();
 		}
 		return role;
+	}
+
+	/**
+	 * 
+	 * @param user
+	 * @param connection
+	 * @return
+	 * @throws SQLException
+	 */
+	public int insert(User user) throws SQLException {
+		int flag = 0;
+		try {
+			if (user != null && connection != null) {
+				preparedStatement = connection.prepareStatement("insert into userdetails values( ? , ? , ?)");
+
+				preparedStatement.setString(1, user.getLoginId());
+				preparedStatement.setString(2, user.getPassword());
+
+				preparedStatement.setString(3, BookReviewConstants.USER_TYPE);
+
+				flag = preparedStatement.executeUpdate();
+
+			}
+		} finally {
+			preparedStatement.close();
+		}
+		return flag;
 	}
 }

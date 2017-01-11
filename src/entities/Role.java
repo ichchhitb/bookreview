@@ -3,10 +3,16 @@ package entities;
 import java.io.Serializable;
 
 public class Role implements Serializable {
+<<<<<<< HEAD
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6767829038192926154L;
+=======
+	private static final long serialVersionUID = 6767829038192926154L;
+	
+	
+>>>>>>> b1b04a5c12d58640714a12ece8ede37d94a3b977
 	String roleId;
 	String roleName;
 	/**

@@ -3,10 +3,18 @@ package entities;
 import java.io.Serializable;
 
 public class User implements Serializable {
+<<<<<<< HEAD
+=======
+	
+>>>>>>> b1b04a5c12d58640714a12ece8ede37d94a3b977
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 369696028452298037L;
+<<<<<<< HEAD
+=======
+	
+>>>>>>> b1b04a5c12d58640714a12ece8ede37d94a3b977
 	String loginId;
 	String password;
 	Role role;

@@ -9,7 +9,7 @@
 </head>
 <body bgcolor="#d9d9d9">
 
-	<a style="float: right;" href="register.jsp">Sign Up</a>
+	<a style="float: right;" href="RegistrationForm.jsp">Sign Up</a>
 	<h1>&nbsp;</h1>
 	<center>
 		<form action="LoginPage" name="form" method="post"
