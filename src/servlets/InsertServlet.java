@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import constants.BookReviewConstants;
 import database.BookDAO;
 import database.BookTypeDAO;
-
 import entities.Book;
 import entities.BookType;
 

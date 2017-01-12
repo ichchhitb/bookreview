@@ -23,4 +23,5 @@ public interface BookReviewConstants {
 	public static final String PASSWORD = "password";
 	public static final String USER_TYPE="2";
 	public static final String ADMIN_TYPE="1";
+	public static final String SUMMARY = "summary";
 }

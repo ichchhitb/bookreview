@@ -59,13 +59,14 @@ public class LoginPage extends HttpServlet {
 			user = dao.isExist(user);
 			if (user != null) {
 				Role role = dao.getRoleForUser(user);
+				user.setRole(role);
 				session.setAttribute("user", user);
 				if (role != null) {
 					if (BookReviewConstants.ADMIN.equals(role.getRoleName()))
-						response.sendRedirect("admin.jsp");
+						response.sendRedirect("Welcome.jsp");
 
 					else if (BookReviewConstants.USER.equals(role.getRoleName()))
-						response.sendRedirect("user.jsp");
+						response.sendRedirect("Welcome.jsp");
 				}
 			} else {
 				response.getWriter().append("<center>Username or password is incorrect</center>");
