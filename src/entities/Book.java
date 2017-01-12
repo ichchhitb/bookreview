@@ -13,6 +13,23 @@ public class Book implements Serializable{
 	String bookimage;
 	String summary;
 	BookType booktype;
+	
+	/**
+	 * @param isbn
+	 * @param bookname
+	 * @param bookauthor
+	 * @param bookimage
+	 * @param summary
+	 * @param booktype
+	 */
+	public Book(String isbn, String bookname, String bookauthor, String bookimage, String summary, BookType booktype) {
+		this.isbn = isbn;
+		this.bookname = bookname;
+		this.bookauthor = bookauthor;
+		this.bookimage = bookimage;
+		this.summary = summary;
+		this.booktype = booktype;
+	}
 	/**
 	 * 
 	 */
