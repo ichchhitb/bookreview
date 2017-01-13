@@ -45,14 +45,14 @@ public class Registration extends HttpServlet {
 		try {
 			flag = new UserDAO(connection).insert(user);
 		} catch (SQLException e) {
-			Logger.getLogger(Registration.class.getName()).warn(e);
+			//Logger.getLogger(Registration.class.getName()).warn(e);
 		}
 
-		if (flag < 0) {
+		/*if (flag < 0) {
 			Logger.getLogger(Registration.class.getName()).info("data insertion FAILED!");
 		} else {
 			Logger.getLogger(Registration.class.getName()).info("data insertion SUCCESSFUL!");
-		}
+		}*/
 
 		response.sendRedirect("index.jsp");
 	}

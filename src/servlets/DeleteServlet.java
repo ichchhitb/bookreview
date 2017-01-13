@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Connection;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import database.BookDAO;
+import database.ConnectionFactory;
 import entities.Book;
 
 /**
@@ -20,10 +23,15 @@ public class DeleteServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
+	Connection connection;
+	@Override
+	public void init() throws ServletException {
+		connection=ConnectionFactory.getConnection();
+	}
 	public DeleteServlet() {
 		super();
 	}
-
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -32,7 +40,7 @@ public class DeleteServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html");
 
-		BookDAO obj = new BookDAO();
+		BookDAO obj = new BookDAO(connection);
 		Book book = new Book();
 		book.setIsbn(request.getParameter("ISBN"));
 		if (obj.delete(book)) {

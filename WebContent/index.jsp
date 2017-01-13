@@ -3,12 +3,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%
+	response.setHeader("Cache-Control", "no-cache");
+	response.setHeader("Cache-Control", "no-store");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
+%>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <title>Insert title here</title>
 </head>
 <body bgcolor="#d9d9d9">
-
+	<%
+		if (session.getAttribute("user") != null)
+			response.sendRedirect("Welcome.jsp");
+	%>
 	<a style="float: right;" href="RegistrationForm.jsp">Sign Up</a>
 	<h1>&nbsp;</h1>
 	<center>
@@ -32,7 +41,7 @@
 				</tr>
 			</table>
 		</form>
-		<script type="text/javascript" src="validateRegistration.js"></script>
+		<script type="text/javascript" src="js/validateRegistration.js"></script>
 	</center>
 </body>
 </html>
