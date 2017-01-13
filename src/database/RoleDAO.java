@@ -11,19 +11,28 @@ import entities.Role;
 public class RoleDAO {
 	Connection connection;
 	PreparedStatement ps;
-
-	public RoleDAO() throws SQLException {
+	
+	/**
+	 * Non-parameterized constructor
+	 * @throws SQLException
+	 */
+    public RoleDAO() throws SQLException {
 		connection = ConnectionFactory.getConnection();
 	}
-
+	
+	/**
+	 * Parameterized constructor
+	 * @param connection
+	 */
 	public RoleDAO(Connection connection) {
 		super();
 		this.connection = connection;
 	}
+	
 	/**
-	 * 
+	 * getRole() method to determine the role user/admin
 	 * @param roleid
-	 * @return
+	 * @return role
 	 * @throws SQLException
 	 */
 	public Role getRole(String roleid) throws SQLException {
@@ -40,9 +49,9 @@ public class RoleDAO {
 		return role;
 	}
 	/**
-	 * 
+	 * setRole() method to set the role of the new user 
 	 * @param role
-	 * @return
+	 * @return flag
 	 * @throws SQLException
 	 */
 	public boolean setRole(Role role) throws SQLException{

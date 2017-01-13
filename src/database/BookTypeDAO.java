@@ -5,17 +5,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
 import constants.BookReviewConstants;
 import entities.BookType;
 
 public class BookTypeDAO {
+	static Logger log = Logger.getLogger(BookDAO.class);
 	Connection con;
 	PreparedStatement stmt;
 	
+	/**
+	 * 
+	 * Default constructor to establish the connection
+	 */
 	public BookTypeDAO() {
 		con=ConnectionFactory.getConnection();
 	}
 	
+	/**
+	 * gettypeByName() to fetch the booktypeid on basis of booktypename
+	 * @param booktypename
+	 */
 	public BookType getTypeByName(String booktypename) {
 		String userid=null;
 		BookType b=null;
@@ -29,9 +40,8 @@ public class BookTypeDAO {
 			}
 			b= new BookType(userid, booktypename);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e);
 		}
-		
 	    return b;
 	}
 }

@@ -15,7 +15,7 @@ public class UserDAO {
 	User user = null;
 
 	/**
-	 * 
+	 * Parameterized constructor
 	 * @param connection
 	 */
 	public UserDAO(Connection connection) {
@@ -24,7 +24,7 @@ public class UserDAO {
 	}
 
 	/**
-	 * 
+	 * isExist() method to validate the authentication of user
 	 * @param user
 	 * @return
 	 * @throws SQLException
@@ -52,7 +52,7 @@ public class UserDAO {
 	}
 
 	/**
-	 * 
+	 * getRoleForUser() method to know the user is admin or normal user
 	 * @param user2
 	 * @return
 	 * @throws SQLException
@@ -81,7 +81,7 @@ public class UserDAO {
 	}
 
 	/**
-	 * 
+	 * insert() method to insert the new user to database
 	 * @param user
 	 * @param connection
 	 * @return

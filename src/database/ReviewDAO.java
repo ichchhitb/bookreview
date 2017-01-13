@@ -18,7 +18,8 @@ public class ReviewDAO {
 	PreparedStatement preparedStatement;
 
 	/**
-	 * @param con
+	 * parameterized constructor
+	 * @param connection
 	 */
 	public ReviewDAO(Connection connection) {
 		super();
@@ -27,6 +28,7 @@ public class ReviewDAO {
 
 	/**
 	 * 
+	 * addReview() method to add the review of the book into database
 	 * @param review
 	 * @return
 	 * @throws SQLException
@@ -49,7 +51,7 @@ public class ReviewDAO {
 	}
 
 	/**
-	 * 
+	 * generateNewReviewId() method to generate new review id
 	 * @return
 	 * @throws SQLException
 	 */
@@ -67,7 +69,7 @@ public class ReviewDAO {
 	}
 
 	/**
-	 * 
+	 * getAverageRatingForBook() to get the average rating of the book searched for
 	 * @param book
 	 * @return
 	 * @throws SQLException
@@ -88,7 +90,7 @@ public class ReviewDAO {
 	}
 
 	/**
-	 * 
+	 * getAllReviewsForBook() method to get all reviews for the particular book searched 
 	 * @param book
 	 * @return
 	 * @throws SQLException

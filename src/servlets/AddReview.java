@@ -3,8 +3,6 @@ package servlets;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,11 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
+import database.BookDAO;
 import database.ConnectionFactory;
 import database.ReviewDAO;
 import entities.Book;
 import entities.Review;
-import entities.Role;
+
 import entities.User;
 
 /**
@@ -24,6 +25,7 @@ import entities.User;
  */
 @WebServlet("/AddReview")
 public class AddReview extends HttpServlet {
+	static Logger log = Logger.getLogger(BookDAO.class);
 	private static final long serialVersionUID = 1L;
       Connection connection; 
     /**
@@ -31,7 +33,7 @@ public class AddReview extends HttpServlet {
      */
     public AddReview() {
         super();
-        // TODO Auto-generated constructor stub
+     
     }
     @Override
     public void init() throws ServletException {
@@ -41,7 +43,7 @@ public class AddReview extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		response.setContentType("text/html");
 		ReviewDAO dao=new ReviewDAO(connection);
 		HttpSession session= request.getSession();
@@ -55,7 +57,7 @@ public class AddReview extends HttpServlet {
 			Review review=new Review(reviewId, reviewTitle, comments, rating, user, book);
 			dao.addReview(review);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e);
 		}
 		response.sendRedirect("Displaybook.jsp");
 	}
@@ -64,7 +66,7 @@ public class AddReview extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

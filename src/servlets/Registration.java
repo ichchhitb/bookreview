@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import constants.BookReviewConstants;
+import database.BookDAO;
 import database.ConnectionFactory;
 import database.UserDAO;
 import entities.Role;
@@ -20,6 +21,7 @@ import entities.User;
 
 @WebServlet("/registration")
 public class Registration extends HttpServlet {
+	static Logger log = Logger.getLogger(BookDAO.class);
 	private static final long serialVersionUID = 1L;
 	Connection connection;
 
@@ -45,14 +47,10 @@ public class Registration extends HttpServlet {
 		try {
 			flag = new UserDAO(connection).insert(user);
 		} catch (SQLException e) {
-			//Logger.getLogger(Registration.class.getName()).warn(e);
+			log.error(e);
 		}
 
-		/*if (flag < 0) {
-			Logger.getLogger(Registration.class.getName()).info("data insertion FAILED!");
-		} else {
-			Logger.getLogger(Registration.class.getName()).info("data insertion SUCCESSFUL!");
-		}*/
+		
 
 		response.sendRedirect("index.jsp");
 	}
