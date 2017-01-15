@@ -5,10 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
 import constants.BookReviewConstants;
 import entities.Role;
 
 public class RoleDAO {
+	static Logger log = Logger.getLogger(RoleDAO.class);
 	Connection connection;
 	PreparedStatement ps;
 	
@@ -37,6 +40,7 @@ public class RoleDAO {
 	 */
 	public Role getRole(String roleid) throws SQLException {
 		Role role = null;
+		log.info("Inside getRole() "+roleid);
 		try {
 			ps = connection.prepareStatement("select * from role where roleid=?");
 			ps.setString(1, roleid);
@@ -46,6 +50,7 @@ public class RoleDAO {
 		} finally {
 			ps.close();
 		}
+		log.info("Exit getRole() ");
 		return role;
 	}
 	/**
@@ -55,6 +60,7 @@ public class RoleDAO {
 	 * @throws SQLException
 	 */
 	public boolean setRole(Role role) throws SQLException{
+		log.info("Inside setRole() "+role.getRoleName());
 		ps=connection.prepareStatement("insert into role values(?,?)");
 		boolean flag = false;
 		
@@ -62,6 +68,7 @@ public class RoleDAO {
 		ps.setString(2, role.getRoleName());
 		
 		ps.executeQuery();
+		log.info("Exit setRole()");
 		return flag;
 	}
 }

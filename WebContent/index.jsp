@@ -44,14 +44,14 @@
 					<br />
 					<div class="input-group">
 						<input id="loginid" type="text" class="form-control input-lg"
-							name="loginid" placeholder="User Name" /> <span
+							name="loginid" placeholder="User Name" required/> <span
 							class="input-group-addon"><i
 							class="glyphicon glyphicon-user"></i></span>
 					</div>
 					<br />
 					<div class="input-group">
 						<input id="password" type="password" class="form-control input-lg"
-							name="password" placeholder="Password" /> <span
+							name="password" placeholder="Password" required/> <span
 							class="input-group-addon"><i
 							class="glyphicon glyphicon-lock"></i></span>
 					</div>

@@ -25,40 +25,20 @@ div.ex {
 	border: 5px solid grey;
 	margin: 0px
 }
+
 </style>
 <body background="img/background.jpg">
 	<h1>&nbsp;</h1>
 	<center>
 		<h1>
-			<font color="white" style="font-family: cursive;">Registration
-				Form</font>
+			<font color="white" style="font-family: cursive;">Register Here</font>
 		</h1>
 	</center>
-	<h1>&nbsp;</h1>
-	<!-- 	<div class="ex">
-		<form action="registration" name="form" method="post"
-			onsubmit="return formValidation();">
-			<table style="with: 50%">
-				<tr>
-					<td>User Name</td>
-					<td><input type="text" name="loginid" required="required" /></td>
-					<td><p id="validateid"></p></td>
-				</tr>
-
-				<tr>
-					<td>Password</td>
-					<td><input type="password" name="password" required="required" /></td>
-					<td><p id="validatepass"></p></td>
-				</tr>
-			</table>
-			<input type="submit" value="register" />
-		</form>
-	</div> -->
 	<div class="container container-fluid">
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
 			<div class="jumbotron text-center">
-				<img src="img/bookicon.png" class="img-rounded" alt="Cinque Terre"
+				<img src="img/register.png" class="img-rounded" alt="Cinque Terre"
 					width="120" height="120">
 
 				<form action="registration" name="form" method="post"

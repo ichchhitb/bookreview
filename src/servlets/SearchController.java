@@ -31,7 +31,7 @@ public class SearchController extends HttpServlet {
                         log.info("Data from ajax call " + term);
 
                         BookDAO dataDao = new BookDAO(connection);
-                        ArrayList<String> list = dataDao.getFrameWork(term);
+                        ArrayList<String> list = dataDao.getMatchingBooks(term);
 
                         String searchList = new Gson().toJson(list);
                         response.getWriter().write(searchList);

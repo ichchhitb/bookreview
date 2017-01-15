@@ -5,17 +5,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
 import constants.BookReviewConstants;
 import entities.Role;
 import entities.User;
 
 public class UserDAO {
+	static Logger log = Logger.getLogger(UserDAO.class);
 	Connection connection;
 	PreparedStatement preparedStatement;
 	User user = null;
 
 	/**
 	 * Parameterized constructor
+	 * 
 	 * @param connection
 	 */
 	public UserDAO(Connection connection) {
@@ -25,11 +29,13 @@ public class UserDAO {
 
 	/**
 	 * isExist() method to validate the authentication of user
+	 * 
 	 * @param user
-	 * @return
+	 * @return user
 	 * @throws SQLException
 	 */
 	public User isExist(User user) throws SQLException {
+		log.info("Inside isExist() " + user.getLoginId());
 		try {
 			preparedStatement = connection.prepareStatement("select * from userdetails where loginid=? and password=?");
 			preparedStatement.setString(1, user.getLoginId());
@@ -48,17 +54,20 @@ public class UserDAO {
 			if (preparedStatement != null)
 				preparedStatement.close();
 		}
+		log.info("Exit isExist() ");
 		return this.user;
 	}
 
 	/**
 	 * getRoleForUser() method to know the user is admin or normal user
+	 * 
 	 * @param user2
-	 * @return
+	 * @return role
 	 * @throws SQLException
 	 */
 	public Role getRoleForUser(User user2) throws SQLException {
 		Role role = null;
+		log.info("Inside getRoleForUser() " + user2.getLoginId());
 		try {
 			preparedStatement = connection.prepareStatement("select roleid from userdetails where loginid=?");
 			preparedStatement.setString(1, user2.getLoginId());
@@ -77,18 +86,21 @@ public class UserDAO {
 			if (preparedStatement != null)
 				preparedStatement.close();
 		}
+		log.info("Exit getRoleForUser()  ");
 		return role;
 	}
 
 	/**
 	 * insert() method to insert the new user to database
+	 * 
 	 * @param user
 	 * @param connection
-	 * @return
+	 * @return int
 	 * @throws SQLException
 	 */
 	public int insert(User user) throws SQLException {
 		int flag = 0;
+		log.info("Inside insert() user " + user.getLoginId());
 		try {
 			if (user != null && connection != null) {
 				preparedStatement = connection.prepareStatement("insert into userdetails values( ? , ? , ?)");
@@ -104,6 +116,7 @@ public class UserDAO {
 		} finally {
 			preparedStatement.close();
 		}
+		log.info("Exit insert() user  ");
 		return flag;
 	}
 }
