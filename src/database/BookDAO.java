@@ -7,20 +7,31 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 import constants.BookReviewConstants;
 import entities.Book;
 import entities.BookType;
 
 public class BookDAO {
+	static Logger log = Logger.getLogger(BookDAO.class);
 	Connection connection;
 	Book book;
 	PreparedStatement preparedStatement;
 	ResultSet resultSet;
-
+	/**
+	 * Parameterized constructor
+	 * @param connection
+	 */
 	public BookDAO(Connection connection) {
 		this.connection = connection;
 	}
-
+	/**
+	 * insert() method to inserting the book to the database
+	 * @param obj
+	 * @throws SQLException
+	 */
+    
 	public void insert(Book obj) throws SQLException {
 		log.info("Inside insert book details " + book.getBookName());
 		try {
@@ -33,11 +44,15 @@ public class BookDAO {
 			preparedStatement.setString(6, obj.getBooktype().getBooktypeid());
 			preparedStatement.executeUpdate();
 		} catch (SQLIntegrityConstraintViolationException e) {
-			e.printStackTrace();
+			log.error(e);
 		} finally {
 			preparedStatement.close();
 		}
 	}
+	/**
+	 * delete() method to deleting the book from the database
+	 * @param obj
+	 */
 
 	public boolean delete(Book obj) {
 		int numberofrowsaffected = 0;
@@ -48,13 +63,17 @@ public class BookDAO {
 			numberofrowsaffected = preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e);
 			return false;
 		}
 
 		return numberofrowsaffected > 0;
 	}
+	/**
+	 * getBookByName() method to fetch the book details from the database
+	 * @param bookName
+	 * @throws SQLException
+	 */
 
 	public Book getBookByName(String bookName) throws SQLException {
 
@@ -77,13 +96,17 @@ public class BookDAO {
 			}
 		} catch (SQLException e) {
 
-			e.printStackTrace();
+			log.error(e);
 		} finally {
 			preparedStatement.close();
 		}
 		return null;
 
 	}
+	/**
+	 * getFramework() method to search the particular book specified by the user from database
+	 * @param bookname
+	 */
 
 	public ArrayList<String> getFrameWork(String bookname) {
 		ArrayList<String> list = new ArrayList<String>();
@@ -95,11 +118,11 @@ public class BookDAO {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				data = rs.getString("bookname");
-				System.out.println(rs.getString("bookname"));
+				log.info(rs.getString("bookname"));
 				list.add(data);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e);
 		}
 		return list;
 	}

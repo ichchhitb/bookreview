@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import constants.BookReviewConstants;
+import database.BookDAO;
 import database.ConnectionFactory;
 import database.UserDAO;
 import entities.Role;
@@ -23,6 +26,7 @@ import entities.User;
  */
 @WebServlet("/LoginPage")
 public class LoginPage extends HttpServlet {
+	static Logger log = Logger.getLogger(BookDAO.class);
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -72,7 +76,7 @@ public class LoginPage extends HttpServlet {
 				response.getWriter().append("<center>Username or password is incorrect</center>");
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e);
 			response.getWriter().append("<center>An error please try again!!!</center>");
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");

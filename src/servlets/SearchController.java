@@ -7,12 +7,15 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import org.apache.log4j.Logger;
+
 import com.google.gson.Gson;
 
 import database.BookDAO;
 import database.ConnectionFactory;
 @WebServlet("/SearchController")
 public class SearchController extends HttpServlet {
+	static Logger log = Logger.getLogger(BookDAO.class);
         private static final long serialVersionUID = 1L;
         Connection connection;
         @Override
@@ -25,7 +28,7 @@ public class SearchController extends HttpServlet {
                 response.setContentType("application/json");
                 try {
                         String term = request.getParameter("term");
-                        System.out.println("Data from ajax call " + term);
+                        log.info("Data from ajax call " + term);
 
                         BookDAO dataDao = new BookDAO(connection);
                         ArrayList<String> list = dataDao.getFrameWork(term);
@@ -35,7 +38,7 @@ public class SearchController extends HttpServlet {
                         
                         
                 } catch (Exception e) {
-                        e.printStackTrace();
+                        log.error(e);
                 }
         }
 }

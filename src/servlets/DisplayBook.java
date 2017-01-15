@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import database.BookDAO;
 import database.ConnectionFactory;
 import entities.Book;
@@ -21,6 +23,7 @@ import entities.Book;
  */
 @WebServlet("/DisplayBook")
 public class DisplayBook extends HttpServlet {
+	static Logger log = Logger.getLogger(BookDAO.class);
 	private static final long serialVersionUID = 1L;
 	Connection connection;
 	@Override
@@ -32,7 +35,7 @@ public class DisplayBook extends HttpServlet {
      */
     public DisplayBook() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
@@ -53,7 +56,7 @@ public class DisplayBook extends HttpServlet {
 			else 
 				response.getWriter().println("<center>No matching books found!!</center>");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e);
 		}
 		RequestDispatcher rd=request.getRequestDispatcher("Welcome.jsp");
 		rd.include(request, response);

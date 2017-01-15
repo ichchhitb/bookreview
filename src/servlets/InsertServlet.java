@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import constants.BookReviewConstants;
+import org.apache.log4j.Logger;
 import database.BookDAO;
 import database.BookTypeDAO;
 import database.ConnectionFactory;
@@ -24,6 +24,7 @@ import entities.BookType;
  */
 @WebServlet("/Insert")
 public class InsertServlet extends HttpServlet {
+	static Logger log = Logger.getLogger(BookDAO.class);
 	private static final long serialVersionUID = 1L;
 	Connection connection;
 	@Override
@@ -35,14 +36,14 @@ public class InsertServlet extends HttpServlet {
      */
     public InsertServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		response.setContentType("text/html");
 		BookTypeDAO dao1=new BookTypeDAO();
 		BookType booktype=null;
@@ -61,7 +62,7 @@ public class InsertServlet extends HttpServlet {
 			dao.insert(b);
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
+			log.error(e);
 		}
 		response.sendRedirect("Insert.jsp");
 		
@@ -71,7 +72,7 @@ public class InsertServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 
