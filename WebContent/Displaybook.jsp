@@ -104,6 +104,14 @@
 	height: 16px;
 	background: url('img/star.png') 0 -16px;
 }
+body{
+	background-color: #FF9633;
+	color: white;
+	font-family: cursive;
+}
+.panel, input, textarea{
+	color:black;
+}
 </style>
 
 
@@ -148,11 +156,11 @@
 
 				<div class="tab-content">
 					<div id="sectionA" class="tab-pane fade in active">
-						<h3>Summary</h3>
+						<h3><b>Summary</b></h3>
 						<p><%=book.getSummary()%></p>
 					</div>
 					<div id="sectionB" class="tab-pane fade">
-						<h3>Reviews</h3>
+						<h3><b>Reviews</b></h3>
 						<div>
 							<input type="hidden" id="avgrating" value="<%=dao.getAverageRatingForBook(book) %>" /> <span
 								class="rated"> <input type="radio" class="rating-input"
@@ -197,7 +205,7 @@
 						<div>
 							<form action="AddReview" method="get">
 								<input type="hidden" value="1000" name="isbn" />
-								<h3>Give your review</h3>
+								<h3><b>Give your review</b></h3>
 								<span class="rating"> <input type="radio"
 									class="rating-input" id="rating-input-1-5" value="5"
 									name="rating"> <label for="rating-input-1-5"

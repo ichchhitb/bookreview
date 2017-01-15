@@ -16,48 +16,66 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script src="js/autoCompleter.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 </head>
 
-<body>
+<body background="img/background.jpg">
 	<%
 		if (session.getAttribute("user") == null)
 			response.sendRedirect("index.jsp");
 		else {
 	%>
 	<a href="Logout" style="float: right;">Sign Out</a>
-	<div class="header" align="center">
-		<h3>Search your books here....</h3>
-	</div>
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<div class="search-container" align="center">
-		<div class="ui-widget">
-			<!-- <span id = "errorMessage"> not found</span> -->
-			<form action="DisplayBook" method="get">
-				<input type="text" id="search" name="search" class="search" /> <input
-					type="submit" value="get details" />
+	<h1>&nbsp;</h1>
+	<center>
+		<h1>
+			<font color="white" style="font-family: cursive;">Welcome to
+				Book Review System</font>
+		</h1>
+	</center>
+	<h1>&nbsp;</h1>
+	<h1>&nbsp;</h1>
+	<div class="container-fluid text-center">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="jumbotron">
+				<div class="search-container" align="center">
+					<div class="ui-widget">
+						<!-- <span id = "errorMessage"> not found</span> -->
+						<form action="DisplayBook" method="get">
+							<!-- <input type="text" id="search" name="search" class="search" /> <input
+								type="submit" value="get details" /> -->
+							<div class="row">
+								<div class="input-group">
+									<input type="text" id="search" name="search"
+										class="search form-control" placeholder="Search for...">
+									<span class="input-group-btn">
+										<input class="btn btn-secondary" value="Go!" type="submit"/>
+									</span>
+								</div>
+							</div>
 
-				<%
-					User admin = (User) session.getAttribute("user");
-						if (BookReviewConstants.ADMIN.equals(admin.getRole().getRoleName())) {
-				%>
+							<%
+								User admin = (User) session.getAttribute("user");
+									if (BookReviewConstants.ADMIN.equals(admin.getRole().getRoleName())) {
+							%>
 
-				<input type="submit" value="Insert Book" formaction="Insert.jsp" />
+							<input type="submit" value="Insert Book" formaction="Insert.jsp" />
 
-				<%
-					}
-				%>
+							<%
+								}
+							%>
 
-			</form>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<%

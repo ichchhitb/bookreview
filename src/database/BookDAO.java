@@ -22,6 +22,7 @@ public class BookDAO {
 	}
 
 	public void insert(Book obj) throws SQLException {
+		log.info("Inside insert book details " + book.getBookName());
 		try {
 			preparedStatement = connection.prepareStatement("insert into bookdetails values(?,?,?,?,?,?)");
 			preparedStatement.setString(1, obj.getIsbn());

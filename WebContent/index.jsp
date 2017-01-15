@@ -12,36 +12,59 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body bgcolor="#d9d9d9">
+<body background="img/background.jpg">
 	<%
 		if (session.getAttribute("user") != null)
 			response.sendRedirect("Welcome.jsp");
 	%>
-	<a style="float: right;" href="RegistrationForm.jsp">Sign Up</a>
 	<h1>&nbsp;</h1>
 	<center>
-		<form action="LoginPage" name="form" method="post"
-			onsubmit="return formValidation();">
-			<table border="0">
-				<tr>
-					<td>Username:</td>
-					<td><input type="text" name="loginid" placeholder="User Name"
-						required></td>
-					<td><font color="red"><p id="validateid"></p></font></td>
-				</tr>
-				<tr>
-					<td>Password:</td>
-					<td><input type="password" name="password"
-						placeholder="Password" required></td>
-					<td><font color="red" id="validatepass"></font></td>
-				</tr>
-				<tr>
-					<td colspan="3"><input type="submit" value="Login"></td>
-				</tr>
-			</table>
-		</form>
-		<script type="text/javascript" src="js/validateRegistration.js"></script>
+		<h1>
+			<font color="white" style="font-family: cursive;">Book Review
+				System</font>
+		</h1>
 	</center>
+	<h1>&nbsp;</h1>
+	<div class="container container-fluid">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="jumbotron text-center">
+				<img src="img/bookicon.png" class="img-rounded" alt="Cinque Terre"
+					width="120" height="120">
+
+				<form action="LoginPage" name="form" method="post"
+					onsubmit="return formValidation();">
+					<br />
+					<div class="input-group">
+						<input id="loginid" type="text" class="form-control input-lg"
+							name="loginid" placeholder="User Name" /> <span
+							class="input-group-addon"><i
+							class="glyphicon glyphicon-user"></i></span>
+					</div>
+					<br />
+					<div class="input-group">
+						<input id="password" type="password" class="form-control input-lg"
+							name="password" placeholder="Password" /> <span
+							class="input-group-addon"><i
+							class="glyphicon glyphicon-lock"></i></span>
+					</div>
+					<br /> <span style="float: right;">Not Registered?&nbsp;<a
+						href="RegistrationForm.jsp">Create an account</a></span> <br /> <br />
+					<div class="input-group">
+						<input type="submit" class="btn btn-success input-lg"
+							style="height: 130%; width: 440%; font-size: 200%;" value="Login" />
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
