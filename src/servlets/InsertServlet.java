@@ -81,6 +81,7 @@ public class InsertServlet extends HttpServlet {
 
 		doGet(request, response);
 	}
+
 	/**
 	 * Destroy()
 	 */

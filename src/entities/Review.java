@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+
 /**
  * Review entity
  */
@@ -12,12 +13,14 @@ public class Review implements Serializable {
 	private int rating;
 	private User user;
 	private Book book;
+
 	/**
 	 * default constructore to create empty object
 	 */
 	public Review() {
 		super();
 	}
+
 	/**
 	 * @param reviewId
 	 * @param reviewTitle
@@ -35,79 +38,95 @@ public class Review implements Serializable {
 		this.user = user;
 		this.book = book;
 	}
+
 	/**
 	 * @return the reviewId
 	 */
 	public long getReviewId() {
 		return reviewId;
 	}
+
 	/**
 	 * @return the reviewTitle
 	 */
 	public String getReviewTitle() {
 		return reviewTitle;
 	}
+
 	/**
 	 * @return the comments
 	 */
 	public String getComments() {
 		return comments;
 	}
+
 	/**
 	 * @return the rating
 	 */
 	public int getRating() {
 		return rating;
 	}
+
 	/**
 	 * @return the user
 	 */
 	public User getUser() {
 		return user;
 	}
+
 	/**
 	 * @return the book
 	 */
 	public Book getBook() {
 		return book;
 	}
+
 	/**
-	 * @param reviewId the reviewId to set
+	 * @param reviewId
+	 *            the reviewId to set
 	 */
 	public void setReviewId(long reviewId) {
 		this.reviewId = reviewId;
 	}
+
 	/**
-	 * @param reviewTitle the reviewTitle to set
+	 * @param reviewTitle
+	 *            the reviewTitle to set
 	 */
 	public void setReviewTitle(String reviewTitle) {
 		this.reviewTitle = reviewTitle;
 	}
+
 	/**
-	 * @param comments the comments to set
+	 * @param comments
+	 *            the comments to set
 	 */
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
+
 	/**
-	 * @param rating the rating to set
+	 * @param rating
+	 *            the rating to set
 	 */
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
+
 	/**
-	 * @param user the user to set
+	 * @param user
+	 *            the user to set
 	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 	/**
-	 * @param book the book to set
+	 * @param book
+	 *            the book to set
 	 */
 	public void setBook(Book book) {
 		this.book = book;
 	}
-	
-	
-	
+
 }

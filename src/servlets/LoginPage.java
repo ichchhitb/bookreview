@@ -65,10 +65,10 @@ public class LoginPage extends HttpServlet {
 				user.setRole(role);
 				session.setAttribute("user", user);
 
-				if (role!=null && BookReviewConstants.ADMIN.equals(role.getRoleName()))
+				if (role != null && BookReviewConstants.ADMIN.equals(role.getRoleName()))
 					response.sendRedirect("Welcome.jsp");
 
-				else if (role!=null && BookReviewConstants.USER.equals(role.getRoleName()))
+				else if (role != null && BookReviewConstants.USER.equals(role.getRoleName()))
 					response.sendRedirect("Welcome.jsp");
 			} else {
 				response.getWriter()
@@ -90,6 +90,7 @@ public class LoginPage extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
+
 	/**
 	 * Destroy()
 	 */

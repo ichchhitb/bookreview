@@ -13,9 +13,11 @@ import org.apache.log4j.Logger;
 import constants.BookReviewConstants;
 import entities.Book;
 import entities.BookType;
+
 /**
  * Data Access class for Book Entity
- * @author ichchhitb
+ * 
+ * @author group4
  *
  */
 public class BookDAO {
@@ -40,7 +42,7 @@ public class BookDAO {
 	 * @throws SQLException
 	 */
 
-	public void insert(Book obj) throws SQLException {
+	public boolean insert(Book obj) throws SQLException {
 		log.info("Inside insert book details " + obj.getBookName());
 		try {
 			preparedStatement = connection.prepareStatement("insert into bookdetails values(?,?,?,?,?,?)");
@@ -53,10 +55,12 @@ public class BookDAO {
 			preparedStatement.executeUpdate();
 		} catch (SQLIntegrityConstraintViolationException e) {
 			log.error("Error in insert: " + e);
+			return false;
 		} finally {
 			preparedStatement.close();
 		}
 		log.info("Exit insert book method");
+		return true;
 	}
 
 	/**
@@ -64,9 +68,10 @@ public class BookDAO {
 	 * 
 	 * @param obj
 	 * @return boolean
+	 * @throws SQLException
 	 */
 
-	public boolean delete(Book obj) {
+	public boolean delete(Book obj) throws SQLException {
 		log.info("Inside delete book details " + obj.getBookName());
 		int numberofrowsaffected = 0;
 		try {
@@ -74,10 +79,11 @@ public class BookDAO {
 			preparedStatement.setString(1, obj.getIsbn());
 
 			numberofrowsaffected = preparedStatement.executeUpdate();
-			preparedStatement.close();
 		} catch (SQLException e) {
 			log.error("Error in delete: " + e);
 			return false;
+		} finally {
+			preparedStatement.close();
 		}
 		log.info("Exit delete book method");
 		return numberofrowsaffected > 0;
@@ -122,8 +128,8 @@ public class BookDAO {
 	}
 
 	/**
-	 * getMatchingBooks() method to search the particular book specified by the user
-	 * from database
+	 * getMatchingBooks() method to search the particular book specified by the
+	 * user from database
 	 * 
 	 * @param bookname
 	 * @return ArrayList<String>
@@ -145,13 +151,12 @@ public class BookDAO {
 			}
 		} catch (Exception e) {
 			log.error("Error in getMatchingBooks(): " + e);
-		}finally
-		{
+		} finally {
 			try {
 				preparedStatement.close();
 			} catch (SQLException e) {
-				
-				log.error("Error in getMatchingBooks();"+e);
+
+				log.error("Error in getMatchingBooks();" + e);
 			}
 		}
 		log.info("Exit getmatchingBooks() method");
@@ -176,7 +181,7 @@ public class BookDAO {
 			}
 		} catch (Exception e) {
 			log.error("Error in getFeaturedBooks(): " + e);
-		}finally{
+		} finally {
 			try {
 				preparedStatement.close();
 			} catch (SQLException e) {

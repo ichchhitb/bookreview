@@ -164,10 +164,10 @@ body {
 				<%} %>
 				<li><a href="Logout">SIGN OUT</a></li>
 			</ul>
-			
-			</div>
 
 		</div>
+
+	</div>
 	</div>
 	</nav>
 
@@ -223,6 +223,8 @@ body {
 								id="ratedstar-4"></label> <input type="radio"
 								class="rating-input" id="rated-input-1-3"> <label
 								for="rated-input-1-3" class="unrated-star" id="ratedstar-3"></label>
+
+
 								<input type="radio" class="rating-input" id="rated-input-1-2">
 								<label for="rated-input-1-2" class="unrated-star"
 								id="ratedstar-2"></label> <input type="radio"
@@ -258,7 +260,6 @@ body {
 
 						<div>
 							<form action="AddReview" method="get">
-								<input type="hidden" value="1000" name="isbn" />
 								<h3>
 									<b>Give your review</b>
 								</h3>
@@ -294,7 +295,7 @@ body {
 						</div>
 					</div>
 					<div id="sectionC" class="tab-pane fade">
-					<h5>&nbsp;</h5>
+						<h5>&nbsp;</h5>
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h5>

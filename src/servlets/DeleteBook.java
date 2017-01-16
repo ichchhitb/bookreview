@@ -48,9 +48,13 @@ public class DeleteBook extends HttpServlet {
 		Book book = new Book();
 		book.setIsbn(request.getParameter("isbn"));
 		HttpSession session = request.getSession();
-		if (dao.delete(book)) {
-			session.setAttribute("delete message", "Book deleted successfully");
-			response.sendRedirect("Welcome.jsp");
+		try {
+			if (dao.delete(book)) {
+				session.setAttribute("delete message", "Book deleted successfully");
+				response.sendRedirect("Welcome.jsp");
+			}
+		} catch (SQLException e) {
+			log.error(e);
 		}
 
 	}

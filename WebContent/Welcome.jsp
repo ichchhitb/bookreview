@@ -139,11 +139,12 @@ body {
 				}
 				if (session.getAttribute("no book") != null) {
 		%>
-		<script> alert('<%=session.getAttribute("no book")%>');
+		<script> alert('<%=session.getAttribute("no book")%>
+			');
 		</script>
 		<%
-				session.setAttribute("no book", null);
-		}
+			session.setAttribute("no book", null);
+				}
 		%>
 	</div>
 	<%

@@ -30,7 +30,8 @@ div.ex {
 	<h1>&nbsp;</h1>
 	<center>
 		<h1>
-			<font color="white" style="font-family: cursive;">Register Here</font>
+			<font color="white" style="font-family: cursive;">Register
+				Here</font>
 		</h1>
 	</center>
 	<div class="container container-fluid">
@@ -45,20 +46,20 @@ div.ex {
 					<br />
 					<div class="input-group">
 						<input id="loginid" type="text" class="form-control input-lg"
-							name="loginid" placeholder="User Name" required/> <span
+							name="loginid" placeholder="User Name" required /> <span
 							class="input-group-addon"><i
 							class="glyphicon glyphicon-user"></i></span>
 					</div>
 					<br />
 					<div class="input-group">
 						<input id="password" type="password" class="form-control input-lg"
-							name="password" placeholder="Password" required/> <span
+							name="password" placeholder="Password" required /> <span
 							class="input-group-addon"><i
 							class="glyphicon glyphicon-lock"></i></span>
 					</div>
-					<br /> 
-						<input type="submit" class="btn btn-success btn-lg btn-block"
-							style="font-size: 200%;" value="Register" />
+					<br /> <input type="submit"
+						class="btn btn-success btn-lg btn-block" style="font-size: 200%;"
+						value="Register" />
 
 				</form>
 			</div>

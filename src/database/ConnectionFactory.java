@@ -8,9 +8,11 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+
 /**
  * Class which provides connection when required
- * @author ichchhitb
+ * 
+ * @author group4
  *
  */
 public class ConnectionFactory {

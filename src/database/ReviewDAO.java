@@ -1,6 +1,5 @@
 package database;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,9 +15,11 @@ import entities.BookType;
 import entities.Review;
 import entities.Role;
 import entities.User;
+
 /**
  * Data access class for Review entity
- * @author ichchhitb
+ * 
+ * @author group4
  *
  */
 public class ReviewDAO {
@@ -28,6 +29,7 @@ public class ReviewDAO {
 
 	/**
 	 * parameterized constructor
+	 * 
 	 * @param connection
 	 */
 	public ReviewDAO(Connection connection) {
@@ -38,6 +40,7 @@ public class ReviewDAO {
 	/**
 	 * 
 	 * addReview() method to add the review of the book into database
+	 * 
 	 * @param review
 	 * @return boolean
 	 * @throws SQLException
@@ -63,6 +66,7 @@ public class ReviewDAO {
 
 	/**
 	 * generateNewReviewId() method to generate new review id
+	 * 
 	 * @return long
 	 * @throws SQLException
 	 */
@@ -76,19 +80,22 @@ public class ReviewDAO {
 				latestReviewId = result.getLong(BookReviewConstants.REVIEW_ID) + 1;
 		} finally {
 			preparedStatement.close();
-		}log.info("Exit genarateNewReviewId() ");
+		}
+		log.info("Exit genarateNewReviewId() ");
 		return latestReviewId;
 	}
 
 	/**
-	 * getAverageRatingForBook() to get the average rating of the book searched for
+	 * getAverageRatingForBook() to get the average rating of the book searched
+	 * for
+	 * 
 	 * @param book
-	 * @return
+	 * @return int
 	 * @throws SQLException
 	 */
 	public int getAverageRatingForBook(Book book) throws SQLException {
 		double averagRating = 0.0;
-		log.info("Inside getAverageRatingForBook() "+book.getIsbn());
+		log.info("Inside getAverageRatingForBook() " + book.getIsbn());
 		try {
 			preparedStatement = connection
 					.prepareStatement("SELECT AVG(rating) AS rating FROM reviewdetails WHERE isbn=?");
@@ -98,19 +105,22 @@ public class ReviewDAO {
 				averagRating = result.getDouble(BookReviewConstants.RATING);
 		} finally {
 			preparedStatement.close();
-		}log.info("Exit getAverageRatingForBook()");
-		return (int)averagRating;
+		}
+		log.info("Exit getAverageRatingForBook()");
+		return (int) averagRating;
 	}
 
 	/**
-	 * getAllReviewsForBook() method to get all reviews for the particular book searched 
+	 * getAllReviewsForBook() method to get all reviews for the particular book
+	 * searched
+	 * 
 	 * @param book
-	 * @return
+	 * @return list
 	 * @throws SQLException
 	 */
 	public List<Review> getAllReviewsForBook(Book book) throws SQLException {
 		ArrayList<Review> reviewList = new ArrayList<>();
-		log.info("Inside getAllReviewsForBook "+book.getIsbn());
+		log.info("Inside getAllReviewsForBook " + book.getIsbn());
 		try {
 			preparedStatement = connection.prepareStatement("SELECT * FROM booktype" + " NATURAL JOIN bookdetails "
 					+ "NATURAL JOIN reviewdetails NATURAL JOIN userdetails "
@@ -137,7 +147,8 @@ public class ReviewDAO {
 			}
 		} finally {
 			preparedStatement.close();
-		}log.info("Exit getAllReviewsForBook() ");
+		}
+		log.info("Exit getAllReviewsForBook() ");
 		return reviewList;
 	}
 }

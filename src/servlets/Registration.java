@@ -50,6 +50,7 @@ public class Registration extends HttpServlet {
 
 		response.sendRedirect("index.jsp");
 	}
+
 	/**
 	 * Destroy()
 	 */

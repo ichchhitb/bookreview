@@ -10,9 +10,11 @@ import org.apache.log4j.Logger;
 import constants.BookReviewConstants;
 import entities.Role;
 import entities.User;
+
 /**
  * Data Access class for User entity
- * @author ichchhitb
+ * 
+ * @author group4
  *
  */
 public class UserDAO {

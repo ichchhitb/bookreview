@@ -3,7 +3,7 @@ package entities;
 import java.io.Serializable;
 /**
  * Book Entity
- * @author ichchhitb
+ * @author Group4
  *
  */
 public class Book implements Serializable{
@@ -40,7 +40,7 @@ public class Book implements Serializable{
 
 	/**
 	 * 
-	 * @return
+	 * @return String
 	 */
 	public String getIsbn() {
 		return isbn;
@@ -54,7 +54,7 @@ public class Book implements Serializable{
 	}
 	/**
 	 * 
-	 * @return
+	 * @return String
 	 */
 	public String getBookName() {
 		return bookName;
@@ -68,7 +68,7 @@ public class Book implements Serializable{
 	}
 	/**
 	 * 
-	 * @return
+	 * @return String
 	 */
 	public String getBookAuthor() {
 		return bookAuthor;
@@ -96,7 +96,7 @@ public class Book implements Serializable{
 	}
 	/**
 	 * 
-	 * @return
+	 * @return String
 	 */
 	public String getSummary() {
 		return summary;
@@ -110,7 +110,7 @@ public class Book implements Serializable{
 	}
 	/**
 	 * 
-	 * @return
+	 * @return String
 	 */
 	public BookType getBookType() {
 		return bookType;

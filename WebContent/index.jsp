@@ -44,23 +44,23 @@
 					<br />
 					<div class="input-group">
 						<input id="loginid" type="text" class="form-control input-lg"
-							name="loginid" placeholder="User Name" required/> <span
+							name="loginid" placeholder="User Name" required /> <span
 							class="input-group-addon"><i
 							class="glyphicon glyphicon-user"></i></span>
 					</div>
 					<br />
 					<div class="input-group">
 						<input id="password" type="password" class="form-control input-lg"
-							name="password" placeholder="Password" required/> <span
+							name="password" placeholder="Password" required /> <span
 							class="input-group-addon"><i
 							class="glyphicon glyphicon-lock"></i></span>
 					</div>
 					<br /> <span style="float: right;">Not Registered?&nbsp;<a
 						href="RegistrationForm.jsp">Create an account</a></span> <br /> <br />
-					
-						<input type="submit" class="btn btn-lg btn-success btn-block"
-							style="font-size: 200%;" value="Login" />
-					
+
+					<input type="submit" class="btn btn-lg btn-success btn-block"
+						style="font-size: 200%;" value="Login" />
+
 
 				</form>
 			</div>

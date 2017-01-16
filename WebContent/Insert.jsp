@@ -37,9 +37,9 @@ body {
 		else {
 				User admin=(User)session.getAttribute("user");
 	%>
-	
-	
-	
+
+
+
 	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -64,13 +64,13 @@ body {
 				<li><a href="Insert.jsp">INSERT</a></li>
 				<li><a href="Logout">SIGN OUT</a></li>
 			</ul>
-			
-			</div>
 
 		</div>
+
+	</div>
 	</div>
 	</nav>
-	
+
 	<h1>&nbsp;</h1>
 	<h1>&nbsp;</h1>
 	<div class="container container-fluid">
@@ -125,9 +125,9 @@ body {
 							class="input-group-addon"><i
 							class="glyphicon glyphicon-link"></i></span>
 					</div>
-					<br />
-						<input type="submit" class="btn btn-lg btn-success btn-block"
-							style="font-size: 200%;" value="Insert" />
+					<br /> <input type="submit"
+						class="btn btn-lg btn-success btn-block" style="font-size: 200%;"
+						value="Insert" />
 
 				</form>
 				<%
