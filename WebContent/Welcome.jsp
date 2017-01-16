@@ -99,7 +99,7 @@ body {
 							<div class="col-md-11">
 								<input type="text" id="search" name="search"
 									class="search form-control input-lg"
-									placeholder="Search for...">
+									placeholder="Search for..." required>
 
 
 							</div>
@@ -137,6 +137,13 @@ body {
 		<%
 			session.setAttribute("delete message", null);
 				}
+				if (session.getAttribute("no book") != null) {
+		%>
+		<script> alert('<%=session.getAttribute("no book")%>');
+		</script>
+		<%
+				session.setAttribute("no book", null);
+		}
 		%>
 	</div>
 	<%

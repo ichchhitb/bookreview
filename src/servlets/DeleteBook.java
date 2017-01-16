@@ -25,39 +25,46 @@ public class DeleteBook extends HttpServlet {
 	static Logger log = Logger.getLogger(DeleteBook.class);
 	private static final long serialVersionUID = 1L;
 	Connection connection;
-	/**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DeleteBook() {
-        super();
-    }  
-	@Override
-    public void init() throws ServletException {
-    	connection=ConnectionFactory.getConnection();
-    }
-    
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BookDAO dao=new BookDAO(connection);
-		Book book=new Book();
-		book.setIsbn(request.getParameter("isbn"));
-		dao.delete(book);
-		HttpSession session =request.getSession();
-		session.setAttribute("delete message", "Book deleted successfully");
-		response.sendRedirect("Welcome.jsp");
-		
+	public DeleteBook() {
+		super();
+	}
+
+	@Override
+	public void init() throws ServletException {
+		connection = ConnectionFactory.getConnection();
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		BookDAO dao = new BookDAO(connection);
+		Book book = new Book();
+		book.setIsbn(request.getParameter("isbn"));
+		HttpSession session = request.getSession();
+		if (dao.delete(book)) {
+			session.setAttribute("delete message", "Book deleted successfully");
+			response.sendRedirect("Welcome.jsp");
+		}
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		doGet(request, response);
 	}
+
 	/**
 	 * Destroy()
 	 */

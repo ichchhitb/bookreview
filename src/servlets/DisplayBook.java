@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,12 +54,11 @@ public class DisplayBook extends HttpServlet {
 				response.sendRedirect("Displaybook.jsp");
 			}
 			else 
-				response.getWriter().println("<center>No matching books found!!</center>");
+				session.setAttribute("no book","No match found!!!");
 		} catch (SQLException e) {
 			log.error(e);
 		}
-		RequestDispatcher rd=request.getRequestDispatcher("Welcome.jsp");
-		rd.include(request, response);
+		response.sendRedirect("Welcome.jsp");
 		
 	}
 
