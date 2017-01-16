@@ -53,12 +53,13 @@ public class DisplayBook extends HttpServlet {
 				session.setAttribute("book", book);
 				response.sendRedirect("Displaybook.jsp");
 			}
-			else 
+			else{ 
 				session.setAttribute("no book","No match found!!!");
+				response.sendRedirect("Welcome.jsp");
+			}
 		} catch (SQLException e) {
 			log.error(e);
 		}
-		response.sendRedirect("Welcome.jsp");
 		
 	}
 
