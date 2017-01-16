@@ -13,6 +13,12 @@ public class Book implements Serializable{
 	private String bookimage;
 	private String summary;
 	private BookType booktype;
+	public Book() {
+		/**
+		 * to create empty object
+		 */
+		
+	}
 	
 	/**
 	 * @param isbn
@@ -30,12 +36,7 @@ public class Book implements Serializable{
 		this.summary = summary;
 		this.booktype = booktype;
 	}
-	/**
-	 * 
-	 */
-	public Book() {
-		
-	}
+
 	/**
 	 * 
 	 * @return

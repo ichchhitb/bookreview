@@ -20,6 +20,23 @@ public class Review implements Serializable {
 		super();
 	}
 	/**
+	 * @param reviewId
+	 * @param reviewTitle
+	 * @param comments
+	 * @param rating
+	 * @param user
+	 * @param book
+	 */
+	public Review(long reviewId, String reviewTitle, String comments, int rating, User user, Book book) {
+		super();
+		this.reviewId = reviewId;
+		this.reviewTitle = reviewTitle;
+		this.comments = comments;
+		this.rating = rating;
+		this.user = user;
+		this.book = book;
+	}
+	/**
 	 * @return the reviewId
 	 */
 	public long getReviewId() {
@@ -91,23 +108,7 @@ public class Review implements Serializable {
 	public void setBook(Book book) {
 		this.book = book;
 	}
-	/**
-	 * @param reviewId
-	 * @param reviewTitle
-	 * @param comments
-	 * @param rating
-	 * @param user
-	 * @param book
-	 */
-	public Review(long reviewId, String reviewTitle, String comments, int rating, User user, Book book) {
-		super();
-		this.reviewId = reviewId;
-		this.reviewTitle = reviewTitle;
-		this.comments = comments;
-		this.rating = rating;
-		this.user = user;
-		this.book = book;
-	}
+	
 	
 	
 }

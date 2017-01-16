@@ -126,11 +126,8 @@ body {
 							class="glyphicon glyphicon-link"></i></span>
 					</div>
 					<br />
-					<div class="input-group">
-						<input type="submit" class="btn btn-success input-lg"
-							style="height: 130%; width: 375%; font-size: 200%;"
-							value="Insert" />
-					</div>
+						<input type="submit" class="btn btn-lg btn-success btn-block"
+							style="font-size: 200%;" value="Insert" />
 
 				</form>
 				<%

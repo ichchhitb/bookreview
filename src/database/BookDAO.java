@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -124,16 +125,15 @@ public class BookDAO {
 	 * @return ArrayList<String>
 	 */
 
-	public ArrayList<String> getMatchingBooks(String bookName) {
+	public List<String> getMatchingBooks(String bookName) {
 		log.info("Inside getMatchingBoooks() :" + bookName);
 
-		ArrayList<String> list = new ArrayList<String>();
-		PreparedStatement ps = null;
+		ArrayList<String> list = new ArrayList<>();
 		String data;
 		try {
-			ps = connection.prepareStatement("SELECT * FROM bookdetails WHERE bookname LIKE ?");
-			ps.setString(1, "%" + bookName + "%");
-			ResultSet rs = ps.executeQuery();
+			preparedStatement = connection.prepareStatement("SELECT * FROM bookdetails WHERE bookname LIKE ?");
+			preparedStatement.setString(1, "%" + bookName + "%");
+			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				data = rs.getString("bookname");
 				log.info(rs.getString("bookname"));
@@ -141,20 +141,27 @@ public class BookDAO {
 			}
 		} catch (Exception e) {
 			log.error("Error in getMatchingBooks(): " + e);
+		}finally
+		{
+			try {
+				preparedStatement.close();
+			} catch (SQLException e) {
+				
+				log.error("Error in getMatchingBooks();"+e);
+			}
 		}
 		log.info("Exit getmatchingBooks() method");
 		return list;
 	}
 
-	public ArrayList<Book> getFeaturedBooks() {
+	public List<Book> getFeaturedBooks() {
 		log.info("Inside getFeaturedBooks() :");
 
 		ArrayList<Book> list = new ArrayList<>();
-		PreparedStatement ps = null;
 		try {
-			ps = connection.prepareStatement(
+			preparedStatement = connection.prepareStatement(
 					"SELECT * FROM bookdetails natural join booktype left outer join reviewdetails on bookdetails.isbn = reviewdetails.isbn order by rating desc limit 4");
-			ResultSet rs = ps.executeQuery();
+			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				BookType type = new BookType(rs.getString(BookReviewConstants.BOOK_TYPE_ID),
 						rs.getString(BookReviewConstants.BOOK_TYPE_NAME));
@@ -165,6 +172,12 @@ public class BookDAO {
 			}
 		} catch (Exception e) {
 			log.error("Error in getFeaturedBooks(): " + e);
+		}finally{
+			try {
+				preparedStatement.close();
+			} catch (SQLException e) {
+				log.error("Error in getFeaturedBooks(): " + e);
+			}
 		}
 		log.info("Exit getFeaturedBooks() method");
 		return list;

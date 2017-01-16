@@ -10,14 +10,13 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import database.BookDAO;
 
 /**
  * Servlet implementation class Logout
  */
 @WebServlet("/Logout")
 public class Logout extends HttpServlet {
-	static Logger log = Logger.getLogger(BookDAO.class);
+	static Logger log = Logger.getLogger(Logout.class);
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -45,5 +44,6 @@ public class Logout extends HttpServlet {
 		
 		doGet(request, response);
 	}
+	
 
 }

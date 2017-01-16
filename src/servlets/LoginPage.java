@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import constants.BookReviewConstants;
-import database.BookDAO;
 import database.ConnectionFactory;
 import database.UserDAO;
 import entities.Role;
@@ -26,7 +25,7 @@ import entities.User;
  */
 @WebServlet("/LoginPage")
 public class LoginPage extends HttpServlet {
-	static Logger log = Logger.getLogger(BookDAO.class);
+	static Logger log = Logger.getLogger(LoginPage.class);
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -65,15 +64,15 @@ public class LoginPage extends HttpServlet {
 				Role role = dao.getRoleForUser(user);
 				user.setRole(role);
 				session.setAttribute("user", user);
-				if (role != null) {
-					if (BookReviewConstants.ADMIN.equals(role.getRoleName()))
-						response.sendRedirect("Welcome.jsp");
 
-					else if (BookReviewConstants.USER.equals(role.getRoleName()))
-						response.sendRedirect("Welcome.jsp");
-				}
+				if (role!=null && BookReviewConstants.ADMIN.equals(role.getRoleName()))
+					response.sendRedirect("Welcome.jsp");
+
+				else if (role!=null && BookReviewConstants.USER.equals(role.getRoleName()))
+					response.sendRedirect("Welcome.jsp");
 			} else {
-				response.getWriter().append("<center><font color='white'>Username or password is incorrect</font></center>");
+				response.getWriter()
+						.append("<center><font color='white'>Username or password is incorrect</font></center>");
 			}
 		} catch (SQLException e) {
 			log.error(e);
@@ -91,5 +90,16 @@ public class LoginPage extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
+	/**
+	 * Destroy()
+	 */
+	@Override
+	public void destroy() {
+		super.destroy();
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			log.error("error in destroy()" + e);
+		}
+	}
 }

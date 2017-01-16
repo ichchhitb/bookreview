@@ -12,6 +12,9 @@ public class User implements Serializable {
 	 * 
 	 */
 	public User() {
+		/**
+		 * to create empty object
+		 */
 	}
 	/**
 	 * 

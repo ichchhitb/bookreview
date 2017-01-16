@@ -23,20 +23,21 @@ import entities.Book;
  */
 @WebServlet("/DisplayBook")
 public class DisplayBook extends HttpServlet {
-	static Logger log = Logger.getLogger(BookDAO.class);
+	static Logger log = Logger.getLogger(DisplayBook.class);
 	private static final long serialVersionUID = 1L;
 	Connection connection;
-	@Override
-	public void init() throws ServletException {
-		connection=ConnectionFactory.getConnection();
-	}
-    /**
+	/**
      * @see HttpServlet#HttpServlet()
      */
     public DisplayBook() {
         super();
         
     }
+	@Override
+	public void init() throws ServletException {
+		connection=ConnectionFactory.getConnection();
+	}
+    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -69,5 +70,16 @@ public class DisplayBook extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
+	/**
+	 * Destroy()
+	 */
+	@Override
+	public void destroy() {
+		super.destroy();
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			log.error("error in destroy()" + e);
+		}
+	}
 }

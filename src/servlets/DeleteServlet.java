@@ -2,12 +2,15 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
 
 import database.BookDAO;
 import database.ConnectionFactory;
@@ -18,18 +21,20 @@ import entities.Book;
  */
 @WebServlet("/DeleteServlet")
 public class DeleteServlet extends HttpServlet {
+	static Logger log = Logger.getLogger(DeleteServlet.class);
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	Connection connection;
+	public DeleteServlet() {
+		super();
+	}
+	
 	@Override
 	public void init() throws ServletException {
 		connection=ConnectionFactory.getConnection();
-	}
-	public DeleteServlet() {
-		super();
 	}
 	
 	/**
@@ -60,5 +65,16 @@ public class DeleteServlet extends HttpServlet {
 		
 		doGet(request, response);
 	}
-
+	/**
+	 * Destroy()
+	 */
+	@Override
+	public void destroy() {
+		super.destroy();
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			log.error("error in destroy()" + e);
+		}
+	}
 }

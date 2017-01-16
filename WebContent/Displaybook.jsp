@@ -1,6 +1,6 @@
 <%@page import="constants.BookReviewConstants"%>
 <%@page import="entities.Review"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="database.ReviewDAO"%>
 <%@page import="database.ConnectionFactory"%>
 <%@page import="java.sql.Connection"%>
@@ -131,7 +131,7 @@ body {
 			Book book = (Book) session.getAttribute("book");
 			User user = (User) session.getAttribute("user");
 			ReviewDAO dao = new ReviewDAO(connection);
-			ArrayList<Review> list = dao.getAllReviewsForBook(book);
+			List<Review> list = dao.getAllReviewsForBook(book);
 			Boolean isAdmin=false;
 			if(BookReviewConstants.ADMIN.equals(user.getRole().getRoleName()))
 				isAdmin=true;

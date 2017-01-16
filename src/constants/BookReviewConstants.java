@@ -1,6 +1,6 @@
 package constants;
 
-public interface BookReviewConstants {
+public class BookReviewConstants {
 	public static final String ADMIN = "admin";
 	public static final String USER = "user";
 	public static final String ROLE_ID = "roleid";
@@ -20,8 +20,11 @@ public interface BookReviewConstants {
 	public static final String REVIEW_TITLE = "reviewtitle";
 	public static final String COMMENTS = "comments";
 	public static final String RATING = "rating";
-	public static final String PASSWORD = "password";
+	public static final String USER_PASS = "password";
 	public static final String USER_TYPE="2";
 	public static final String ADMIN_TYPE="1";
 	public static final String SUMMARY = "summary";
+	private BookReviewConstants() {
+		
+	}
 }

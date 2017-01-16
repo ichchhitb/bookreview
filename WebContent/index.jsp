@@ -57,10 +57,10 @@
 					</div>
 					<br /> <span style="float: right;">Not Registered?&nbsp;<a
 						href="RegistrationForm.jsp">Create an account</a></span> <br /> <br />
-					<div class="input-group">
-						<input type="submit" class="btn btn-success input-lg"
-							style="height: 130%; width: 440%; font-size: 200%;" value="Login" />
-					</div>
+					
+						<input type="submit" class="btn btn-lg btn-success btn-block"
+							style="font-size: 200%;" value="Login" />
+					
 
 				</form>
 			</div>

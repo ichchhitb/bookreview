@@ -14,6 +14,9 @@ public class Role implements Serializable {
 	 * 
 	 */
 	public Role() {
+		/**
+		 * to create empty object
+		 */
 
 	}
 	/**

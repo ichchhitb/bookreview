@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import database.BookDAO;
 import database.ConnectionFactory;
 import database.ReviewDAO;
 import entities.Book;
@@ -25,7 +24,7 @@ import entities.User;
  */
 @WebServlet("/AddReview")
 public class AddReview extends HttpServlet {
-	static Logger log = Logger.getLogger(BookDAO.class);
+	static Logger log = Logger.getLogger(AddReview.class);
 	private static final long serialVersionUID = 1L;
       Connection connection; 
     /**
@@ -68,6 +67,18 @@ public class AddReview extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		doGet(request, response);
+	}
+	/**
+	 * Destroy()
+	 */
+	@Override
+	public void destroy() {
+		super.destroy();
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			log.error("error in destroy()" + e);
+		}
 	}
 
 }

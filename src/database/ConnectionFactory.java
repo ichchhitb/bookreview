@@ -8,6 +8,11 @@ import org.apache.log4j.Logger;
 
 public class ConnectionFactory {
 	static Logger log = Logger.getLogger(BookDAO.class);
+	
+	private ConnectionFactory()
+	{
+		
+	}
 	/**
 	 * getConnection() method to establish the database connection
 	 * @return connection

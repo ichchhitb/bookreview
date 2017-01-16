@@ -1,10 +1,12 @@
 package database;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -102,7 +104,7 @@ public class ReviewDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public ArrayList<Review> getAllReviewsForBook(Book book) throws SQLException {
+	public List<Review> getAllReviewsForBook(Book book) throws SQLException {
 		ArrayList<Review> reviewList = new ArrayList<>();
 		log.info("Inside getAllReviewsForBook "+book.getIsbn());
 		try {
@@ -115,7 +117,7 @@ public class ReviewDAO {
 				Role role = new Role(result.getString(BookReviewConstants.ROLE_ID),
 						result.getString(BookReviewConstants.ROLE_NAME));
 				User user = new User(result.getString(BookReviewConstants.LOGIN_ID),
-						result.getString(BookReviewConstants.PASSWORD), role);
+						result.getString(BookReviewConstants.USER_PASS), role);
 				BookType bookType = new BookType(result.getString(BookReviewConstants.BOOK_TYPE_ID),
 						result.getString(BookReviewConstants.BOOK_TYPE_NAME));
 				Book book1 = new Book(result.getString(BookReviewConstants.ISBN),

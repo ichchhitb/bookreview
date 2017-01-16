@@ -37,13 +37,12 @@ public class UserDAO {
 	public User isExist(User user) throws SQLException {
 		log.info("Inside isExist() " + user.getLoginId());
 		try {
-			preparedStatement = connection.prepareStatement("select * from userdetails where loginid=? and password=?");
+			preparedStatement = connection.prepareStatement("select * from userdetails where loginid=?");
 			preparedStatement.setString(1, user.getLoginId());
-			preparedStatement.setString(2, user.getPassword());
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				String loginIdFromDb = rs.getString(BookReviewConstants.LOGIN_ID);
-				String passwordFromDb = rs.getString(BookReviewConstants.PASSWORD);
+				String passwordFromDb = rs.getString(BookReviewConstants.USER_PASS);
 				if (loginIdFromDb.equals(user.getLoginId()) && passwordFromDb.equals(user.getPassword())) {
 					this.user = new User();
 					this.user.setLoginId(loginIdFromDb);
@@ -102,17 +101,16 @@ public class UserDAO {
 		int flag = 0;
 		log.info("Inside insert() user " + user.getLoginId());
 		try {
-			if (user != null && connection != null) {
-				preparedStatement = connection.prepareStatement("insert into userdetails values( ? , ? , ?)");
 
-				preparedStatement.setString(1, user.getLoginId());
-				preparedStatement.setString(2, user.getPassword());
+			preparedStatement = connection.prepareStatement("insert into userdetails values( ? , ? , ?)");
 
-				preparedStatement.setString(3, BookReviewConstants.USER_TYPE);
+			preparedStatement.setString(1, user.getLoginId());
+			preparedStatement.setString(2, user.getPassword());
 
-				flag = preparedStatement.executeUpdate();
+			preparedStatement.setString(3, BookReviewConstants.USER_TYPE);
 
-			}
+			flag = preparedStatement.executeUpdate();
+
 		} finally {
 			preparedStatement.close();
 		}

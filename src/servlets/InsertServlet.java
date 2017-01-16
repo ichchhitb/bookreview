@@ -1,7 +1,5 @@
 package servlets;
 
-
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -25,58 +23,74 @@ import entities.BookType;
  */
 @WebServlet("/Insert")
 public class InsertServlet extends HttpServlet {
-	static Logger log = Logger.getLogger(BookDAO.class);
+	static Logger log = Logger.getLogger(InsertServlet.class);
 	private static final long serialVersionUID = 1L;
 	Connection connection;
-	@Override
-	public void init() throws ServletException {
-		connection=ConnectionFactory.getConnection();
-	}
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public InsertServlet() {
-        super();
-        
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public InsertServlet() {
+		super();
+
+	}
+
+	@Override
+	public void init() throws ServletException {
+		connection = ConnectionFactory.getConnection();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		response.setContentType("text/html");
-		HttpSession session=request.getSession();
-		BookTypeDAO dao1=new BookTypeDAO(connection);
-		BookType booktype=null;
-		booktype = dao1.getTypeByName(request.getParameter("bookTypeName"));
-		Book b=new Book();
+		HttpSession session = request.getSession();
+		BookTypeDAO dao1 = new BookTypeDAO(connection);
+		BookType booktype = dao1.getTypeByName(request.getParameter("bookTypeName"));
+		Book b = new Book();
 		b.setIsbn(request.getParameter("ISBN_insert"));
 		b.setBookName(request.getParameter("bookName"));
 		b.setBookAuthor(request.getParameter("author"));
 		b.setBookImage(request.getParameter("image"));
 		b.setSummary(request.getParameter("summary"));
 		b.setBooktype(booktype);
-		
+
 		BookDAO dao;
 		try {
 			dao = new BookDAO(connection);
 			dao.insert(b);
 		} catch (SQLException e) {
-			
+
 			log.error(e);
 		}
-		session.setAttribute("insert message","Inserted Successfully");
+		session.setAttribute("insert message", "Inserted Successfully");
 		response.sendRedirect("Insert.jsp");
-		
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		doGet(request, response);
 	}
-
+	/**
+	 * Destroy()
+	 */
+	@Override
+	public void destroy() {
+		super.destroy();
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			log.error("error in destroy()" + e);
+		}
+	}
 }

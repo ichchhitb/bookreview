@@ -13,14 +13,10 @@ public class BookType implements Serializable{
 	 * 
 	 */
 	public BookType() {
+		/**
+		 * to create empty object
+		 */
 		
-	}
-	/**
-	 * 
-	 * @return
-	 */
-	public String getBooktypeid() {
-		return booktypeid;
 	}
 	/**
 	 * 
@@ -31,6 +27,14 @@ public class BookType implements Serializable{
 		this.booktypeid = booktypeid;
 		this.booktypename = booktypename;
 	}
+	/**
+	 * 
+	 * @return
+	 */
+	public String getBooktypeid() {
+		return booktypeid;
+	}
+	
 	/**
 	 * 
 	 * @param booktypeid
