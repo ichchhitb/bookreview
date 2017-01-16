@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 import constants.BookReviewConstants;
 import entities.Book;
 import entities.BookType;
@@ -14,6 +16,7 @@ import entities.Role;
 import entities.User;
 
 public class ReviewDAO {
+	static Logger log = Logger.getLogger(ReviewDAO.class);
 	Connection connection;
 	PreparedStatement preparedStatement;
 
@@ -30,10 +33,11 @@ public class ReviewDAO {
 	 * 
 	 * addReview() method to add the review of the book into database
 	 * @param review
-	 * @return
+	 * @return boolean
 	 * @throws SQLException
 	 */
 	public boolean addReview(Review review) throws SQLException {
+		log.info("Inside addReview()");
 		int updatedRows = 0;
 		try {
 			preparedStatement = connection.prepareStatement("insert into reviewdetails values(?,?,?,?,?,?)");
@@ -47,16 +51,18 @@ public class ReviewDAO {
 		} finally {
 			preparedStatement.close();
 		}
+		log.info("Exit addReview() ");
 		return updatedRows > 0;
 	}
 
 	/**
 	 * generateNewReviewId() method to generate new review id
-	 * @return
+	 * @return long
 	 * @throws SQLException
 	 */
 	public long genarateNewReviewId() throws SQLException {
 		long latestReviewId = 1;
+		log.info("Inside genarateNewReviewId()");
 		try {
 			preparedStatement = connection.prepareStatement("select max(reviewid) as reviewid from reviewdetails");
 			ResultSet result = preparedStatement.executeQuery();
@@ -64,7 +70,7 @@ public class ReviewDAO {
 				latestReviewId = result.getLong(BookReviewConstants.REVIEW_ID) + 1;
 		} finally {
 			preparedStatement.close();
-		}
+		}log.info("Exit genarateNewReviewId() ");
 		return latestReviewId;
 	}
 
@@ -76,6 +82,7 @@ public class ReviewDAO {
 	 */
 	public int getAverageRatingForBook(Book book) throws SQLException {
 		double averagRating = 0.0;
+		log.info("Inside getAverageRatingForBook() "+book.getIsbn());
 		try {
 			preparedStatement = connection
 					.prepareStatement("SELECT AVG(rating) AS rating FROM reviewdetails WHERE isbn=?");
@@ -85,7 +92,7 @@ public class ReviewDAO {
 				averagRating = result.getDouble(BookReviewConstants.RATING);
 		} finally {
 			preparedStatement.close();
-		}
+		}log.info("Exit getAverageRatingForBook()");
 		return (int)averagRating;
 	}
 
@@ -97,6 +104,7 @@ public class ReviewDAO {
 	 */
 	public ArrayList<Review> getAllReviewsForBook(Book book) throws SQLException {
 		ArrayList<Review> reviewList = new ArrayList<>();
+		log.info("Inside getAllReviewsForBook "+book.getIsbn());
 		try {
 			preparedStatement = connection.prepareStatement("SELECT * FROM booktype" + " NATURAL JOIN bookdetails "
 					+ "NATURAL JOIN reviewdetails NATURAL JOIN userdetails "
@@ -123,7 +131,7 @@ public class ReviewDAO {
 			}
 		} finally {
 			preparedStatement.close();
-		}
+		}log.info("Exit getAllReviewsForBook() ");
 		return reviewList;
 	}
 }

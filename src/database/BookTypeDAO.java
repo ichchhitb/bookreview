@@ -19,15 +19,17 @@ public class BookTypeDAO {
 	 * 
 	 * Default constructor to establish the connection
 	 */
-	public BookTypeDAO() {
-		con=ConnectionFactory.getConnection();
+	public BookTypeDAO(Connection connection) {
+		this.con = connection;
 	}
 	
 	/**
 	 * gettypeByName() to fetch the booktypeid on basis of booktypename
 	 * @param booktypename
+	 * @return BookType
 	 */
 	public BookType getTypeByName(String booktypename) {
+		log.info("Inside getTypeByName() " + booktypename);
 		String userid=null;
 		BookType b=null;
 		try {
@@ -40,8 +42,9 @@ public class BookTypeDAO {
 			}
 			b= new BookType(userid, booktypename);
 		} catch (SQLException e) {
-			log.error(e);
+			log.error("Error inside getTypeByName() "+e);
 		}
+		log.info("Exit getTypeByName() ");
 	    return b;
 	}
 }

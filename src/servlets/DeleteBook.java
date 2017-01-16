@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import database.BookDAO;
 import database.ConnectionFactory;
@@ -39,6 +40,8 @@ public class DeleteBook extends HttpServlet {
 		Book book=new Book();
 		book.setIsbn(request.getParameter("isbn"));
 		dao.delete(book);
+		HttpSession session =request.getSession();
+		session.setAttribute("delete message", "Book deleted successfully");
 		response.sendRedirect("Welcome.jsp");
 		
 	}

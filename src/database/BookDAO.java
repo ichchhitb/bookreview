@@ -16,23 +16,27 @@ import entities.BookType;
 public class BookDAO {
 	static Logger log = Logger.getLogger(BookDAO.class);
 	Connection connection;
-	Book book;
 	PreparedStatement preparedStatement;
 	ResultSet resultSet;
+
 	/**
 	 * Parameterized constructor
+	 * 
 	 * @param connection
 	 */
 	public BookDAO(Connection connection) {
 		this.connection = connection;
 	}
+
 	/**
 	 * insert() method to inserting the book to the database
+	 * 
 	 * @param obj
 	 * @throws SQLException
 	 */
-    
+
 	public void insert(Book obj) throws SQLException {
+		log.info("Inside insert book details " + obj.getBookName());
 		try {
 			preparedStatement = connection.prepareStatement("insert into bookdetails values(?,?,?,?,?,?)");
 			preparedStatement.setString(1, obj.getIsbn());
@@ -43,17 +47,22 @@ public class BookDAO {
 			preparedStatement.setString(6, obj.getBooktype().getBooktypeid());
 			preparedStatement.executeUpdate();
 		} catch (SQLIntegrityConstraintViolationException e) {
-			log.error(e);
+			log.error("Error in insert: " + e);
 		} finally {
 			preparedStatement.close();
 		}
+		log.info("Exit insert book method");
 	}
+
 	/**
 	 * delete() method to deleting the book from the database
+	 * 
 	 * @param obj
+	 * @return boolean
 	 */
 
 	public boolean delete(Book obj) {
+		log.info("Inside delete book details " + obj.getBookName());
 		int numberofrowsaffected = 0;
 		try {
 			preparedStatement = connection.prepareStatement("delete from bookdetails where ISBN=?");
@@ -62,20 +71,23 @@ public class BookDAO {
 			numberofrowsaffected = preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
-			log.error(e);
+			log.error("Error in delete: " + e);
 			return false;
 		}
-
+		log.info("Exit delete book method");
 		return numberofrowsaffected > 0;
 	}
+
 	/**
 	 * getBookByName() method to fetch the book details from the database
+	 * 
 	 * @param bookName
 	 * @throws SQLException
+	 * @return Book
 	 */
 
 	public Book getBookByName(String bookName) throws SQLException {
-
+		log.info("Inside getBookByName() :" + bookName);
 		try {
 			preparedStatement = connection
 					.prepareStatement("select * from bookdetails natural join booktype where bookname = ?");
@@ -95,25 +107,32 @@ public class BookDAO {
 			}
 		} catch (SQLException e) {
 
-			log.error(e);
+			log.error("Error in getBookByName(): " + e);
 		} finally {
 			preparedStatement.close();
 		}
+		log.info("Exit getBookByName() method");
 		return null;
 
 	}
+
 	/**
-	 * getFramework() method to search the particular book specified by the user from database
+	 * getFramework() method to search the particular book specified by the user
+	 * from database
+	 * 
 	 * @param bookname
+	 * @return ArrayList<String>
 	 */
 
-	public ArrayList<String> getFrameWork(String bookname) {
+	public ArrayList<String> getMatchingBooks(String bookName) {
+		log.info("Inside getMatchingBoooks() :" + bookName);
+
 		ArrayList<String> list = new ArrayList<String>();
 		PreparedStatement ps = null;
 		String data;
 		try {
 			ps = connection.prepareStatement("SELECT * FROM bookdetails WHERE bookname LIKE ?");
-			ps.setString(1, "%" + bookname + "%");
+			ps.setString(1, "%" + bookName + "%");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				data = rs.getString("bookname");
@@ -121,8 +140,33 @@ public class BookDAO {
 				list.add(data);
 			}
 		} catch (Exception e) {
-			log.error(e);
+			log.error("Error in getMatchingBooks(): " + e);
 		}
+		log.info("Exit getmatchingBooks() method");
+		return list;
+	}
+
+	public ArrayList<Book> getFeaturedBooks() {
+		log.info("Inside getFeaturedBooks() :");
+
+		ArrayList<Book> list = new ArrayList<>();
+		PreparedStatement ps = null;
+		try {
+			ps = connection.prepareStatement(
+					"SELECT * FROM bookdetails natural join booktype left outer join reviewdetails on bookdetails.isbn = reviewdetails.isbn order by rating desc limit 4");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				BookType type = new BookType(rs.getString(BookReviewConstants.BOOK_TYPE_ID),
+						rs.getString(BookReviewConstants.BOOK_TYPE_NAME));
+				Book book = new Book(rs.getString(BookReviewConstants.ISBN),
+						rs.getString(BookReviewConstants.BOOK_NAME), rs.getString(BookReviewConstants.BOOK_AUTHOR),
+						rs.getString(BookReviewConstants.BOOK_IMAGE), rs.getString(BookReviewConstants.SUMMARY), type);
+				list.add(book);
+			}
+		} catch (Exception e) {
+			log.error("Error in getFeaturedBooks(): " + e);
+		}
+		log.info("Exit getFeaturedBooks() method");
 		return list;
 	}
 

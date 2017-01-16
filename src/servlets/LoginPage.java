@@ -73,11 +73,11 @@ public class LoginPage extends HttpServlet {
 						response.sendRedirect("Welcome.jsp");
 				}
 			} else {
-				response.getWriter().append("<center>Username or password is incorrect</center>");
+				response.getWriter().append("<center><font color='white'>Username or password is incorrect</font></center>");
 			}
 		} catch (SQLException e) {
 			log.error(e);
-			response.getWriter().append("<center>An error please try again!!!</center>");
+			response.getWriter().append("<center><font color='white'>An error please try again!!!</font></center>");
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 		rd.include(request, response);

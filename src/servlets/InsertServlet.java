@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import database.BookDAO;
@@ -45,7 +46,8 @@ public class InsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		response.setContentType("text/html");
-		BookTypeDAO dao1=new BookTypeDAO();
+		HttpSession session=request.getSession();
+		BookTypeDAO dao1=new BookTypeDAO(connection);
 		BookType booktype=null;
 		booktype = dao1.getTypeByName(request.getParameter("bookTypeName"));
 		Book b=new Book();
@@ -64,6 +66,7 @@ public class InsertServlet extends HttpServlet {
 			
 			log.error(e);
 		}
+		session.setAttribute("insert message","Inserted Successfully");
 		response.sendRedirect("Insert.jsp");
 		
 	}

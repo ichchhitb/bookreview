@@ -7,12 +7,12 @@ public class Book implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	String isbn;
-	String bookname;
-	String bookauthor;
-	String bookimage;
-	String summary;
-	BookType booktype;
+	private String isbn;
+	private String bookname;
+	private String bookauthor;
+	private String bookimage;
+	private String summary;
+	private BookType booktype;
 	
 	/**
 	 * @param isbn

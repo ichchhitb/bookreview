@@ -15,6 +15,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
@@ -104,6 +106,16 @@
 	height: 16px;
 	background: url('img/star.png') 0 -16px;
 }
+
+body {
+	background-color: #FF9633;
+	color: white;
+	font-family: cursive;
+}
+
+.panel, input, textarea {
+	color: black;
+}
 </style>
 
 
@@ -120,15 +132,58 @@
 			User user = (User) session.getAttribute("user");
 			ReviewDAO dao = new ReviewDAO(connection);
 			ArrayList<Review> list = dao.getAllReviewsForBook(book);
+			Boolean isAdmin=false;
+			if(BookReviewConstants.ADMIN.equals(user.getRole().getRoleName()))
+				isAdmin=true;
 	%>
-	<a href="Logout" style="float: right;">Sign Out</a>
+
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+				aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="Welcome.jsp"><img
+				src="img/bookicon.png" class="img-rounded" alt="Cinque Terre"
+				width="25" height="25"></a> <a class="navbar-brand">Hello <%=user.getLoginId()%></a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="Welcome.jsp">HOME</a></li>
+				<%if(isAdmin) {%>
+				<li><a href="Insert.jsp">INSERT</a></li>
+				<%} %>
+				<li><a href="Logout">SIGN OUT</a></li>
+			</ul>
+			
+			</div>
+
+		</div>
+	</div>
+	</nav>
+
+
+
+
+
+
+	<h3>&nbsp;</h3>
 	<h3>&nbsp;</h3>
 	<div class="container container-fluid">
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
 			<div class="jumbotron text-center">
 				<%
-					if (BookReviewConstants.ADMIN.equals(user.getRole().getRoleName())) {
+					if (isAdmin) {
 				%>
 				<a href="DeleteBook?isbn=<%=book.getIsbn()%>"><img id="delete"
 					alt="delete" src="img/delete.png" style="float: right;" width="25"
@@ -148,24 +203,31 @@
 
 				<div class="tab-content">
 					<div id="sectionA" class="tab-pane fade in active">
-						<h3>Summary</h3>
+						<h3>
+							<b>Summary</b>
+						</h3>
 						<p><%=book.getSummary()%></p>
 					</div>
 					<div id="sectionB" class="tab-pane fade">
-						<h3>Reviews</h3>
+						<h3>
+							<b>Reviews</b>
+						</h3>
 						<div>
-							<input type="hidden" id="avgrating" value="<%=dao.getAverageRatingForBook(book) %>" /> <span
+							<input type="hidden" id="avgrating"
+								value="<%=dao.getAverageRatingForBook(book)%>" /> <span
 								class="rated"> <input type="radio" class="rating-input"
-								id="rated-input-1-5"> <label for="rated-input-1-5" id="ratedstar-5"
-								class="unrated-star"></label> <input type="radio"
-								class="rating-input" id="rated-input-1-4"> <label
-								for="rated-input-1-4" class="unrated-star" id="ratedstar-4"></label> <input
-								type="radio" class="rating-input" id="rated-input-1-3">
-								<label for="rated-input-1-3" class="unrated-star" id="ratedstar-3"></label> <input
-								type="radio" class="rating-input" id="rated-input-1-2">
-								<label for="rated-input-1-2" class="unrated-star" id="ratedstar-2"></label> <input
-								type="radio" class="rating-input" id="rated-input-1-1">
-								<label for="rated-input-1-1" class="unrated-star" id="ratedstar-1"></label>
+								id="rated-input-1-5"> <label for="rated-input-1-5"
+								id="ratedstar-5" class="unrated-star"></label> <input
+								type="radio" class="rating-input" id="rated-input-1-4">
+								<label for="rated-input-1-4" class="unrated-star"
+								id="ratedstar-4"></label> <input type="radio"
+								class="rating-input" id="rated-input-1-3"> <label
+								for="rated-input-1-3" class="unrated-star" id="ratedstar-3"></label>
+								<input type="radio" class="rating-input" id="rated-input-1-2">
+								<label for="rated-input-1-2" class="unrated-star"
+								id="ratedstar-2"></label> <input type="radio"
+								class="rating-input" id="rated-input-1-1"> <label
+								for="rated-input-1-1" class="unrated-star" id="ratedstar-1"></label>
 							</span>
 
 
@@ -197,7 +259,9 @@
 						<div>
 							<form action="AddReview" method="get">
 								<input type="hidden" value="1000" name="isbn" />
-								<h3>Give your review</h3>
+								<h3>
+									<b>Give your review</b>
+								</h3>
 								<span class="rating"> <input type="radio"
 									class="rating-input" id="rating-input-1-5" value="5"
 									name="rating"> <label for="rating-input-1-5"
@@ -216,14 +280,21 @@
 									class="rating-star"></label>
 								</span>
 								<h5>Title</h5>
-								<input type="text" name="reviewtitle" />
+								<div class="form-group">
+									<input type="text" name="reviewtitle" class="form-control"
+										id="reviewtitle">
+								</div>
 								<h5>Comments</h5>
-								<textarea rows="4" cols="50" name="comments"></textarea>
-								<br> <br> <input type="submit" value="Add Review" />
+								<div class="form-group">
+									<textarea name="comments" class="form-control" rows="5"
+										cols="50" id="comment"></textarea>
+								</div>
+								<input class="btn btn-default" type="submit" value="Add Review" />
 							</form>
 						</div>
 					</div>
 					<div id="sectionC" class="tab-pane fade">
+					<h5>&nbsp;</h5>
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h5>
