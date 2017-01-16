@@ -120,7 +120,7 @@ body {
 
 
 
-<title>Insert title here</title>
+<title>Book Review System | Display Book</title>
 </head>
 <body>
 
