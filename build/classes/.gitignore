@@ -1,6 +1,4 @@
+/test/
 /database/
 /entities/
 /servlets/
-/constants/
-/config.properties
-/log4j.properties
