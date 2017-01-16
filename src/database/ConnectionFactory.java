@@ -8,9 +8,13 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
-
+/**
+ * Class which provides connection when required
+ * @author ichchhitb
+ *
+ */
 public class ConnectionFactory {
-	static Logger log = Logger.getLogger(BookDAO.class);
+	private static final Logger log = Logger.getLogger(BookDAO.class);
 
 	private ConnectionFactory() {
 

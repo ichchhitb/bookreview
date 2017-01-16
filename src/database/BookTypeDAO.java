@@ -9,11 +9,15 @@ import org.apache.log4j.Logger;
 
 import constants.BookReviewConstants;
 import entities.BookType;
-
+/**
+ * Data access class for BookType entity
+ * @author ichchhitb
+ *
+ */
 public class BookTypeDAO {
-	static Logger log = Logger.getLogger(BookDAO.class);
-	Connection con;
-	PreparedStatement stmt;
+	private static final Logger log = Logger.getLogger(BookDAO.class);
+	private Connection con;
+	private PreparedStatement stmt;
 	
 	/**
 	 * 

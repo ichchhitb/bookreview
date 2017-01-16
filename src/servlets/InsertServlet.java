@@ -57,7 +57,7 @@ public class InsertServlet extends HttpServlet {
 		b.setBookAuthor(request.getParameter("author"));
 		b.setBookImage(request.getParameter("image"));
 		b.setSummary(request.getParameter("summary"));
-		b.setBooktype(booktype);
+		b.setBookType(booktype);
 
 		BookDAO dao;
 		try {

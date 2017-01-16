@@ -9,11 +9,15 @@ import org.apache.log4j.Logger;
 
 import constants.BookReviewConstants;
 import entities.Role;
-
+/**
+ * Data access class for Role entity
+ * @author ichchhitb
+ *
+ */
 public class RoleDAO {
-	static Logger log = Logger.getLogger(RoleDAO.class);
-	Connection connection;
-	PreparedStatement ps;
+	private static final Logger log = Logger.getLogger(RoleDAO.class);
+	private Connection connection;
+	private PreparedStatement ps;
 	
 	/**
 	 * Non-parameterized constructor
@@ -67,7 +71,7 @@ public class RoleDAO {
 		ps.setString(1, role.getRoleId());
 		ps.setString(2, role.getRoleName());
 		
-		ps.executeQuery();
+		ps.executeUpdate();
 		log.info("Exit setRole()");
 		return flag;
 	}

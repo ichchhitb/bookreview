@@ -1,60 +1,58 @@
 package entities;
 
 import java.io.Serializable;
-
+/**
+ * BookType entity
+ * @author ichchhitb
+ *
+ */
 public class BookType implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private String booktypeid;
-	private String booktypename;
+	private String bookTypeId;
+	private String bookTypeName;
 	/**
-	 * 
+	 * to create an empty object
 	 */
 	public BookType() {
-		/**
-		 * to create empty object
-		 */
-		
+		super();
 	}
 	/**
 	 * 
-	 * @param booktypeid, booktypename
+	 * @param bookTypeid, bookTypeName
 	 */
-	public BookType(String booktypeid, String booktypename) {
+	public BookType(String bookTypeId, String bookTypeName) {
 		super();
-		this.booktypeid = booktypeid;
-		this.booktypename = booktypename;
+		this.bookTypeId = bookTypeId;
+		this.bookTypeName = bookTypeName;
 	}
 	/**
 	 * 
 	 * @return
 	 */
-	public String getBooktypeid() {
-		return booktypeid;
+	public String getBookTypeId() {
+		return bookTypeId;
 	}
 	
 	/**
 	 * 
-	 * @param booktypeid
+	 * @param bookTypeid
 	 */
-	public void setBooktypeid(String booktypeid) {
-		this.booktypeid = booktypeid;
+	public void setBookTypeId(String bookTypeid) {
+		this.bookTypeId = bookTypeid;
 	}
 	/**
 	 * 
 	 * @return
 	 */
-	public String getBooktypename() {
-		return booktypename;
+	public String getBookTypeName() {
+		return bookTypeName;
 	}
 	/**
 	 * 
-	 * @param booktypename
+	 * @param bookTypeName
 	 */
-	public void setBooktypename(String booktypename) {
-		this.booktypename = booktypename;
+	public void setBookTypeName(String bookTypeName) {
+		this.bookTypeName = bookTypeName;
 	}
 	
 

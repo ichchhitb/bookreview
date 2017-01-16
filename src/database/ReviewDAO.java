@@ -16,11 +16,15 @@ import entities.BookType;
 import entities.Review;
 import entities.Role;
 import entities.User;
-
+/**
+ * Data access class for Review entity
+ * @author ichchhitb
+ *
+ */
 public class ReviewDAO {
-	static Logger log = Logger.getLogger(ReviewDAO.class);
-	Connection connection;
-	PreparedStatement preparedStatement;
+	private static final Logger log = Logger.getLogger(ReviewDAO.class);
+	private Connection connection;
+	private PreparedStatement preparedStatement;
 
 	/**
 	 * parameterized constructor

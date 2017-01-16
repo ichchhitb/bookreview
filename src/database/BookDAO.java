@@ -13,12 +13,16 @@ import org.apache.log4j.Logger;
 import constants.BookReviewConstants;
 import entities.Book;
 import entities.BookType;
-
+/**
+ * Data Access class for Book Entity
+ * @author ichchhitb
+ *
+ */
 public class BookDAO {
-	static Logger log = Logger.getLogger(BookDAO.class);
-	Connection connection;
-	PreparedStatement preparedStatement;
-	ResultSet resultSet;
+	private static final Logger log = Logger.getLogger(BookDAO.class);
+	private Connection connection;
+	private PreparedStatement preparedStatement;
+	private ResultSet resultSet;
 
 	/**
 	 * Parameterized constructor
@@ -45,7 +49,7 @@ public class BookDAO {
 			preparedStatement.setString(3, obj.getBookAuthor());
 			preparedStatement.setString(4, obj.getBookImage());
 			preparedStatement.setString(5, obj.getSummary());
-			preparedStatement.setString(6, obj.getBooktype().getBooktypeid());
+			preparedStatement.setString(6, obj.getBookType().getBookTypeId());
 			preparedStatement.executeUpdate();
 		} catch (SQLIntegrityConstraintViolationException e) {
 			log.error("Error in insert: " + e);
@@ -118,7 +122,7 @@ public class BookDAO {
 	}
 
 	/**
-	 * getFramework() method to search the particular book specified by the user
+	 * getMatchingBooks() method to search the particular book specified by the user
 	 * from database
 	 * 
 	 * @param bookname

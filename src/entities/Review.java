@@ -1,11 +1,10 @@
 package entities;
 
 import java.io.Serializable;
-
+/**
+ * Review entity
+ */
 public class Review implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -652867132555411682L;
 	private long reviewId;
 	private String reviewTitle;
@@ -14,7 +13,7 @@ public class Review implements Serializable {
 	private User user;
 	private Book book;
 	/**
-	 * 
+	 * default constructore to create empty object
 	 */
 	public Review() {
 		super();

@@ -1,23 +1,24 @@
 package entities;
 
 import java.io.Serializable;
-
+/**
+ * Book Entity
+ * @author ichchhitb
+ *
+ */
 public class Book implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String isbn;
-	private String bookname;
-	private String bookauthor;
-	private String bookimage;
+	private String bookName;
+	private String bookAuthor;
+	private String bookImage;
 	private String summary;
-	private BookType booktype;
+	private BookType bookType;
+	/**
+	 * to create empty object
+	 */
 	public Book() {
-		/**
-		 * to create empty object
-		 */
-		
+		super();
 	}
 	
 	/**
@@ -28,13 +29,13 @@ public class Book implements Serializable{
 	 * @param summary
 	 * @param booktype
 	 */
-	public Book(String isbn, String bookname, String bookauthor, String bookimage, String summary, BookType booktype) {
+	public Book(String isbn, String bookName, String bookAuthor, String bookImage, String summary, BookType bookType) {
 		this.isbn = isbn;
-		this.bookname = bookname;
-		this.bookauthor = bookauthor;
-		this.bookimage = bookimage;
+		this.bookName = bookName;
+		this.bookAuthor = bookAuthor;
+		this.bookImage = bookImage;
 		this.summary = summary;
-		this.booktype = booktype;
+		this.bookType = bookType;
 	}
 
 	/**
@@ -56,42 +57,42 @@ public class Book implements Serializable{
 	 * @return
 	 */
 	public String getBookName() {
-		return bookname;
+		return bookName;
 	}
 	/**
 	 * 
 	 * @param bookname
 	 */
 	public void setBookName(String bookName) {
-		this.bookname = bookName;
+		this.bookName = bookName;
 	}
 	/**
 	 * 
 	 * @return
 	 */
 	public String getBookAuthor() {
-		return bookauthor;
+		return bookAuthor;
 	}
 	/**
 	 * 
 	 * @param bookauthor
 	 */
 	public void setBookAuthor(String bookAuthor) {
-		this.bookauthor = bookAuthor;
+		this.bookAuthor = bookAuthor;
 	}
 	/**
 	 * 
 	 * @return
 	 */
 	public String getBookImage() {
-		return bookimage;
+		return bookImage;
 	}
 	/**
 	 * 
 	 * @param bookimage
 	 */
-	public void setBookImage(String bookimage) {
-		this.bookimage = bookimage;
+	public void setBookImage(String bookImage) {
+		this.bookImage = bookImage;
 	}
 	/**
 	 * 
@@ -111,16 +112,16 @@ public class Book implements Serializable{
 	 * 
 	 * @return
 	 */
-	public BookType getBooktype() {
-		return booktype;
+	public BookType getBookType() {
+		return bookType;
 	}
 	/**
 	 * 
 	 * @param booktype
 	 */
 
-	public void setBooktype(BookType booktype) {
-		this.booktype = booktype;
+	public void setBookType(BookType bookType) {
+		this.bookType = bookType;
 	}
 	
 	

@@ -1,7 +1,11 @@
 package entities;
 
 import java.io.Serializable;
-
+/**
+ * User entity
+ * @author ichchhitb
+ *
+ */
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 369696028452298037L;
@@ -9,12 +13,10 @@ public class User implements Serializable {
 	private String password;
 	private Role role;
 	/**
-	 * 
+	 * to create empty object
 	 */
 	public User() {
-		/**
-		 * to create empty object
-		 */
+		super();
 	}
 	/**
 	 * 

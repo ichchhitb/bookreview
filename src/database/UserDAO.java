@@ -10,12 +10,16 @@ import org.apache.log4j.Logger;
 import constants.BookReviewConstants;
 import entities.Role;
 import entities.User;
-
+/**
+ * Data Access class for User entity
+ * @author ichchhitb
+ *
+ */
 public class UserDAO {
-	static Logger log = Logger.getLogger(UserDAO.class);
-	Connection connection;
-	PreparedStatement preparedStatement;
-	User user = null;
+	private static final Logger log = Logger.getLogger(UserDAO.class);
+	private Connection connection;
+	private PreparedStatement preparedStatement;
+	private User user = null;
 
 	/**
 	 * Parameterized constructor

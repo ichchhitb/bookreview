@@ -1,23 +1,20 @@
 package entities;
 
 import java.io.Serializable;
-
+/**
+ * Role entity
+ */
 public class Role implements Serializable {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 6767829038192926154L;
 
 	private String roleId;
 	private String roleName;
 	/**
-	 * 
+	 * to create empty object
 	 */
 	public Role() {
-		/**
-		 * to create empty object
-		 */
-
+		super();
 	}
 	/**
 	 * 
