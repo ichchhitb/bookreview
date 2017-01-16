@@ -12,6 +12,8 @@
 	<classpathentry kind="lib" path="C:/Program Files/Apache Software Foundation/Tomcat 8.0/lib/jsp-api.jar"/>
 	<classpathentry kind="lib" path="D:/Jars/mysql-connector-java-5.1.23-bin.jar"/>
 	<classpathentry kind="lib" path="D:/Jars/log4j.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/gson-2.2.2.jar"/>
 	<classpathentry kind="lib" path="D:/Jars/junit4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,35 +13,29 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import constants.BookReviewConstants;
+import database.BookDAO;
 import database.ConnectionFactory;
-import database.UserDAO;
-import entities.Role;
-import entities.User;
+import entities.Book;
 
 /**
- * Servlet implementation class LoginPage
+ * Servlet implementation class DisplayBook
  */
-@WebServlet("/LoginPage")
-public class LoginPage extends HttpServlet {
-	static Logger log = Logger.getLogger(LoginPage.class);
+@WebServlet("/DisplayBook")
+public class DisplayBook extends HttpServlet {
+	static Logger log = Logger.getLogger(DisplayBook.class);
 	private static final long serialVersionUID = 1L;
+	Connection connection;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	Connection connection;
-
-	public LoginPage() {
+	public DisplayBook() {
 		super();
+
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	public void init() throws ServletException {
-		super.init();
 		connection = ConnectionFactory.getConnection();
 	}
 
@@ -52,34 +45,23 @@ public class LoginPage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String bookName = request.getParameter("search");
+		BookDAO dao = new BookDAO(connection);
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
-		String loginid = request.getParameter("loginid");
-		String password = request.getParameter("password");
-		User user = new User(loginid, password, null);
-		UserDAO dao = new UserDAO(connection);
 		try {
-			user = dao.isExist(user);
-			if (user != null) {
-				Role role = dao.getRoleForUser(user);
-				user.setRole(role);
-				session.setAttribute("user", user);
-
-				if (role != null && BookReviewConstants.ADMIN.equals(role.getRoleName()))
-					response.sendRedirect("Welcome.jsp");
-
-				else if (role != null && BookReviewConstants.USER.equals(role.getRoleName()))
-					response.sendRedirect("Welcome.jsp");
+			Book book = dao.getBookByName(bookName);
+			if (book != null) {
+				session.setAttribute("book", book);
+				response.sendRedirect("Displaybook.jsp");
 			} else {
-				response.getWriter()
-						.append("<center><font color='white'>Username or password is incorrect</font></center>");
+				session.setAttribute("no book", "No match found!!!");
+				response.sendRedirect("Welcome.jsp");
 			}
 		} catch (SQLException e) {
 			log.error(e);
-			response.getWriter().append("<center><font color='white'>An error please try again!!!</font></center>");
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-		rd.include(request, response);
+
 	}
 
 	/**

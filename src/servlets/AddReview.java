@@ -3,8 +3,6 @@ package servlets;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,35 +12,32 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import constants.BookReviewConstants;
 import database.ConnectionFactory;
-import database.UserDAO;
-import entities.Role;
+import database.ReviewDAO;
+import entities.Book;
+import entities.Review;
+
 import entities.User;
 
 /**
- * Servlet implementation class LoginPage
+ * Servlet implementation class AddReview
  */
-@WebServlet("/LoginPage")
-public class LoginPage extends HttpServlet {
-	static Logger log = Logger.getLogger(LoginPage.class);
+@WebServlet("/AddReview")
+public class AddReview extends HttpServlet {
+	static Logger log = Logger.getLogger(AddReview.class);
 	private static final long serialVersionUID = 1L;
+	Connection connection;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	Connection connection;
-
-	public LoginPage() {
+	public AddReview() {
 		super();
+
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	public void init() throws ServletException {
-		super.init();
 		connection = ConnectionFactory.getConnection();
 	}
 
@@ -52,34 +47,23 @@ public class LoginPage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		response.setContentType("text/html");
+		ReviewDAO dao = new ReviewDAO(connection);
 		HttpSession session = request.getSession();
-		String loginid = request.getParameter("loginid");
-		String password = request.getParameter("password");
-		User user = new User(loginid, password, null);
-		UserDAO dao = new UserDAO(connection);
+		Book book = (Book) session.getAttribute("book");
+		User user = (User) session.getAttribute("user");
+		String reviewTitle = request.getParameter("reviewtitle");
+		int rating = Integer.parseInt(request.getParameter("rating"));
+		String comments = request.getParameter("comments");
 		try {
-			user = dao.isExist(user);
-			if (user != null) {
-				Role role = dao.getRoleForUser(user);
-				user.setRole(role);
-				session.setAttribute("user", user);
-
-				if (role != null && BookReviewConstants.ADMIN.equals(role.getRoleName()))
-					response.sendRedirect("Welcome.jsp");
-
-				else if (role != null && BookReviewConstants.USER.equals(role.getRoleName()))
-					response.sendRedirect("Welcome.jsp");
-			} else {
-				response.getWriter()
-						.append("<center><font color='white'>Username or password is incorrect</font></center>");
-			}
+			long reviewId = dao.genarateNewReviewId();
+			Review review = new Review(reviewId, reviewTitle, comments, rating, user, book);
+			dao.addReview(review);
 		} catch (SQLException e) {
 			log.error(e);
-			response.getWriter().append("<center><font color='white'>An error please try again!!!</font></center>");
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-		rd.include(request, response);
+		response.sendRedirect("Displaybook.jsp");
 	}
 
 	/**
@@ -88,6 +72,7 @@ public class LoginPage extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		doGet(request, response);
 	}
 
@@ -103,4 +88,5 @@ public class LoginPage extends HttpServlet {
 			log.error("error in destroy()" + e);
 		}
 	}
+
 }

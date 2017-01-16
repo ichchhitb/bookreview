@@ -1,14 +1,27 @@
 package entities;
 
-public class User {
-	String loginId;
-	String password;
-	Role role;
+import java.io.Serializable;
+
+/**
+ * User entity
+ * 
+ * @author group4
+ *
+ */
+public class User implements Serializable {
+
+	private static final long serialVersionUID = 369696028452298037L;
+	private String loginId;
+	private String password;
+	private Role role;
+
 	/**
-	 * 
+	 * to create empty object
 	 */
 	public User() {
+		super();
 	}
+
 	/**
 	 * 
 	 * @param loginid
@@ -21,27 +34,31 @@ public class User {
 		this.password = password;
 		this.role = role;
 	}
+
 	/**
 	 * 
-	 * @return
+	 * @return String
 	 */
 	public String getLoginId() {
 		return loginId;
 	}
+
 	/**
 	 * 
-	 * @return
+	 * @return String
 	 */
 	public String getPassword() {
 		return password;
 	}
+
 	/**
 	 * 
-	 * @return
+	 * @return Role
 	 */
 	public Role getRole() {
 		return role;
 	}
+
 	/**
 	 * 
 	 * @param loginid
@@ -49,6 +66,7 @@ public class User {
 	public void setLoginId(String loginId) {
 		this.loginId = loginId;
 	}
+
 	/**
 	 * 
 	 * @param password
@@ -56,6 +74,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	/**
 	 * 
 	 * @param role

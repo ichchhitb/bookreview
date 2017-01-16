@@ -1,45 +1,47 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-<%
-	response.setHeader("Cache-Control", "no-cache");
-	response.setHeader("Cache-Control", "no-store");
-	response.setHeader("Pragma", "no-cache");
-	response.setDateHeader("Expires", 0);
-%>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
-<title>Book Review System | Login</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Book Review System | Registration</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
+<%
+	response.setHeader("Cache-Control", "no-cache");
+	response.setHeader("Cache-Control", "no-store");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
+%>
+<style>
+div.ex {
+	text-align: right width:300px;
+	padding: 10px;
+	border: 5px solid grey;
+	margin: 0px
+}
+</style>
 <body background="img/background.jpg">
-	<%
-		if (session.getAttribute("user") != null)
-			response.sendRedirect("Welcome.jsp");
-	%>
 	<h1>&nbsp;</h1>
 	<center>
 		<h1>
-			<font color="white" style="font-family: cursive;">Book Review
-				System</font>
+			<font color="white" style="font-family: cursive;">Register
+				Here</font>
 		</h1>
 	</center>
-	<h1>&nbsp;</h1>
 	<div class="container container-fluid">
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
 			<div class="jumbotron text-center">
-				<img src="img/bookicon.png" class="img-rounded" alt="Cinque Terre"
+				<img src="img/register.png" class="img-rounded" alt="Cinque Terre"
 					width="120" height="120">
 
-				<form action="LoginPage" name="form" method="post"
+				<form action="registration" name="form" method="post"
 					onsubmit="return formValidation();">
 					<br />
 					<div class="input-group">
@@ -55,16 +57,15 @@
 							class="input-group-addon"><i
 							class="glyphicon glyphicon-lock"></i></span>
 					</div>
-					<br /> <span style="float: right;">Not Registered?&nbsp;<a
-						href="RegistrationForm.jsp">Create an account</a></span> <br /> <br />
-
-					<input type="submit" class="btn btn-lg btn-success btn-block"
-						style="font-size: 200%;" value="Login" />
-
+					<br /> <input type="submit"
+						class="btn btn-success btn-lg btn-block" style="font-size: 200%;"
+						value="Register" />
 
 				</form>
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript" src="js/validateRegistration.js"></script>
+
 </body>
 </html>

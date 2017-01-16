@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,35 +13,28 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import constants.BookReviewConstants;
+import database.BookDAO;
 import database.ConnectionFactory;
-import database.UserDAO;
-import entities.Role;
-import entities.User;
+import entities.Book;
 
 /**
- * Servlet implementation class LoginPage
+ * Servlet implementation class DeleteBook
  */
-@WebServlet("/LoginPage")
-public class LoginPage extends HttpServlet {
-	static Logger log = Logger.getLogger(LoginPage.class);
+@WebServlet("/DeleteBook")
+public class DeleteBook extends HttpServlet {
+	static Logger log = Logger.getLogger(DeleteBook.class);
 	private static final long serialVersionUID = 1L;
+	Connection connection;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	Connection connection;
-
-	public LoginPage() {
+	public DeleteBook() {
 		super();
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	public void init() throws ServletException {
-		super.init();
 		connection = ConnectionFactory.getConnection();
 	}
 
@@ -52,34 +44,19 @@ public class LoginPage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType("text/html");
+		BookDAO dao = new BookDAO(connection);
+		Book book = new Book();
+		book.setIsbn(request.getParameter("isbn"));
 		HttpSession session = request.getSession();
-		String loginid = request.getParameter("loginid");
-		String password = request.getParameter("password");
-		User user = new User(loginid, password, null);
-		UserDAO dao = new UserDAO(connection);
 		try {
-			user = dao.isExist(user);
-			if (user != null) {
-				Role role = dao.getRoleForUser(user);
-				user.setRole(role);
-				session.setAttribute("user", user);
-
-				if (role != null && BookReviewConstants.ADMIN.equals(role.getRoleName()))
-					response.sendRedirect("Welcome.jsp");
-
-				else if (role != null && BookReviewConstants.USER.equals(role.getRoleName()))
-					response.sendRedirect("Welcome.jsp");
-			} else {
-				response.getWriter()
-						.append("<center><font color='white'>Username or password is incorrect</font></center>");
+			if (dao.delete(book)) {
+				session.setAttribute("delete message", "Book deleted successfully");
+				response.sendRedirect("Welcome.jsp");
 			}
 		} catch (SQLException e) {
 			log.error(e);
-			response.getWriter().append("<center><font color='white'>An error please try again!!!</font></center>");
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-		rd.include(request, response);
+
 	}
 
 	/**
@@ -88,6 +65,7 @@ public class LoginPage extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		doGet(request, response);
 	}
 
@@ -103,4 +81,5 @@ public class LoginPage extends HttpServlet {
 			log.error("error in destroy()" + e);
 		}
 	}
+
 }
